@@ -1,25 +1,34 @@
 <template lang="">
-    <v-container class="black--text white" height="600px">
+    <v-container class="black--text containerId " height="600px">
     <v-row>
          <v-col cols="3">
-                <img  :src="imagen"></img>
+             <img  width="300px" height="500px" :src="imagen"></img>
+             <v-rating
+               small
+                 :length="10"
+                 v-model="anime.score"
+                   background-color="orange lighten-3"
+                  color="orange"
+                large>
+             </v-rating>
          </v-col>
-         <v-col> 
-            <v-card-title class="d-flex justify-center">
+         <v-col cols="8" class="ml-12" > 
+            <v-card-title class="d-flex justify-center text-h3 text-center">
                 {{anime.title}}
             </v-card-title>
             <div>
                 <v-card-title class="d-flex justify-center">
              Sinopsis  
             </v-card-title>
-            <div>
+            <div class="text-justify">
                 {{anime.synopsis}}
-               
             </div>
             </div>
         </v-col>
 
     </v-row>
+    <v-divider></v-divider>
+  
 
    
     
@@ -41,8 +50,8 @@ export default {
         this.imagen = imagen2.data.data.images.webp.image_url
         this.anime = url.data.data
         console.log(url.data.data)
-        
-    
+
+
     }
 
 
@@ -51,6 +60,9 @@ export default {
 
 
 </script>
-<style lang="">
-    
+<style >
+.containerId {
+    border: 4px solid var(--color-negro);
+    background-color: #fff;
+}
 </style>

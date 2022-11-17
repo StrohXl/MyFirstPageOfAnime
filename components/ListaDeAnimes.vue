@@ -4,14 +4,14 @@
             <v-row>
                 <template v-for="(Anime, index) in populares" >
                     <v-col class="d-flex justify-center pa-4" v-if="index < 20">
-                        <v-card width="200px" height="220px" class="carta" tile :to="`/`+ Anime.entry[1].mal_id" router exact >
+                        <v-card width="200px" style="min-height:100px;" class="carta" tile :to="`/`+ Anime.entry[1].mal_id" router exact >
                             <div style="height: 170px; " class="contentImg"  >
-                                <div class="play">
+                                <div class="play" style="height: 170px;">
                                     <v-icon class="text-h1 blue--text">mdi-play-circle</v-icon>
                                 </div>
                                 <img :src="Anime.entry[1].images.jpg.image_url" class="imagenlist">
                             </div>
-                            <v-card-title class="text-subtitle-2 text-center">{{Anime.entry[1].title}}</v-card-title>
+                            <v-card-title class="text-subtitle-2 text-center black--text">{{Anime.entry[1].title}}</v-card-title>
                            
                         </v-card>
                     </v-col>
@@ -58,7 +58,8 @@ export default{
 }
 
 .carta {
-    border: 2px solid var(--color-negro) !important;
+    border: 4px solid var(--color-negro);
+    background-color: rgb(255, 255, 255) !important;
 }
 
 .ListaRow {
