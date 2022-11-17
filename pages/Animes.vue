@@ -26,19 +26,26 @@
 </template>
 <script>
 import ListaDeAnimes from '../json/Lista1.json';
+import axios from 'axios'
 export default {
     name: "Animes",
     data() {
         return {
             Lista: ListaDeAnimes,
             cantidad: 40,
+            generos: []
         }
     },
     methods: {
         aumentar() {
             this.cantidad = this.cantidad + 40
         }
-    }
+    },
+    async created() {
+    const ListaDeGeneros = await axios.get("https://api.jikan.moe/v4/genres/anime");
+    this.generos = ListaDeGeneros.data.data;
+    console.log(ListaDeGeneros.data.data)
+  },
 }
 </script>
 <style>

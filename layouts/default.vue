@@ -4,23 +4,31 @@
     <v-app-bar class="pl-5 pr-5" style="top: 0; z-index: 1000;" color="dark" fixed elevation="0">
 
       <Nav />
-       <v-tooltip v-model="show" bottom v-for="(item, index) in botones" >
+      <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
-         <v-btn value="recent" icon @click.stop="cambio = !cambio"  class="boton" v-bind="attrs" v-on="on">
-           <v-icon>mdi-menu</v-icon>
-         </v-btn>
-          <v-btn value="recent" icon @click.stop="cambioResponsive = !cambioResponsive" class="botonResponsive" v-bind="attrs" v-on="on">
-           <v-icon>mdi-menu</v-icon>
-         </v-btn>
+          <v-btn value="recent" icon @click.stop="cambio = !cambio" class="boton" v-bind="attrs" v-on="on">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+
         </template>
         <span>menu</span>
-        </v-tooltip>  
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn value="recent" icon @click.stop="cambioResponsive = !cambioResponsive" class="botonResponsive"
+            v-bind="attrs" v-on="on">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </template>
+        <span>menu</span>
+      </v-tooltip>
+
     </v-app-bar>
     <v-main class="mt-16 ">
       <div>
         <v-row>
-          <NavigationDrawer :variant="cambio" />
-          <NavigationResponsive :variante="cambioResponsive" />
+          <NavigationDrawer :geners="generos" :variant="cambio" @actualizarCambio="Cambiar" @activarGenerosAbuelo="activarGeneros" />
+          <NavigationResponsive  :geners="generos" :variante="cambioResponsive" />
           <v-col :cols="cambio ? colActivo : colNormal" :class="cambio ? 'colDefaultActive' : 'colDefault'"
             class="colDefaultResponsive mt-12">
             <Nuxt />
@@ -36,27 +44,18 @@
 import NavigationDrawer from '../components/NavigationDrawer.vue';
 import Nav from '../components/Nav.vue';
 import NavigationResponsive from '../components/NavigationResponsive.vue';
-
+import axios from 'axios';
 export default {
-
   name: "DefaultLayout",
   data() {
     return {
-      cambio: false,
+      generos: [],
+      cambio: true,
       colNormal: 9,
       colActivo: 11,
       cambioResponsive: false,
       windowWidth: null,
-      botones:[
-        {
-          clases: 'boton',
-          varibale: cambio
-        },
-        { 
-          clases: 'botonResponsive',
-          varibale: cambioResponsive
-        }
-      ]
+
     };
   },
   components: {
@@ -74,11 +73,17 @@ export default {
       else {
         this.cambioResponsive = false;
       }
+    },
+    Cambiar() {
+      this.cambio = true
+    },
+    activarGeneros() {
+      this.cambio = false
     }
   },
-  created() {
-
-
+  async created() {
+    const ListaDeGeneros = await axios.get("https://api.jikan.moe/v4/genres/anime");
+    this.generos = ListaDeGeneros.data.data;
   },
 }
 </script>

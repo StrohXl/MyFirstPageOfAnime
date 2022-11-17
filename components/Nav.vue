@@ -11,7 +11,7 @@
             <v-text-field class="mt-5" color="white" dense rounded v-model="message" append-outer-icon="mdi-magnify"
               single-line outlined clear-icon="mdi-close-circle" clearable placeholder="Buscar" type="text"
               @click:append="toggleMarker" @click:append-outer="sendMessage" @click:clear="clearMessage"></v-text-field>
-
+              
           </v-form>
         </v-col>
       </v-row>

@@ -32,8 +32,10 @@ export default{
        }
     },
      async created(){
+
         const res = await axios.get('https://api.jikan.moe/v4/recommendations/anime')
         this.populares = res.data.data
+
         
     }
 }
