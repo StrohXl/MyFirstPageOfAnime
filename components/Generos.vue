@@ -4,7 +4,7 @@
 
 
             <template v-slot:activator>
-                <v-tooltip left>
+                <v-tooltip right>
                     <template v-slot:activator="{ on, attrs }" v-bind="attrs" v-on="on">
                         <v-list-item-action  >
                             <v-icon :class="`${hover ? 'blue--text' : ''}`">mdi-view-grid</v-icon>
@@ -52,7 +52,6 @@
 
 </template>
 <script>
-import axios from "axios"
 export default {
     name: 'Generos',
     data() {

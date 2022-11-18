@@ -1,5 +1,5 @@
 <template >
- <v-navigation-drawer  temporary v-model='variante' fixed color="#272727" class="NavigationR" right >
+ <v-navigation-drawer  temporary v-model='variante' style="overflow: auto;" fixed color="#272727" class="NavigationR" left >
       <v-list style="top: 60px; position: fixed;width: 100%;">
         <v-hover v-slot="{ hover }" v-for="(item, i) in items" :key="i">
           <v-list-item :to="item.to" router exact>
@@ -11,17 +11,20 @@
             </v-list-item-content>
           </v-list-item>
         </v-hover>
-         <Generos :variant="variante" :generos="geners"  />
+         <Generos :variant="variante" :generos="geners" @activarGenerosPadre="activarGeneros" />
+         <MiniTop class="mt-6" :top="miniTop" :cartaGeneros="variant? 'cartaGenerosActive':'cartaGeneros'" />
       </v-list>
  </v-navigation-drawer>
 </template>
 <script>
 import Generos from './Generos.vue';
+import MiniTop from './MiniTop.vue';
 export default {
     name: "NavigationResponsive",
     data() {
         return {
             generos: [],
+            variant: false,
             drawer: true,
             items: [
                 {
@@ -47,8 +50,13 @@ export default {
             ],
         };
     },
-    props: ["variante","geners"],
-    components: { Generos }
+    props: ["variante","geners", "miniTop"],
+    components: { Generos, MiniTop },
+    methods:{
+      activarGeneros() {
+      this.$emit('activarGenerosAbuelo')
+    }
+    }
 }
 </script>
 <style >

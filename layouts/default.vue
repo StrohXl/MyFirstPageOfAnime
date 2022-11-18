@@ -1,34 +1,21 @@
 <template>
 
   <v-app>
-    <v-app-bar class="pl-5 pr-5" style="top: 0; z-index: 1000;" color="dark" fixed elevation="0">
-
+    <v-app-bar class="pl-5 pr-5" style="top: 0; z-index: 1000;" color="dark" fixed elevation="0">    
+          <v-btn value="recent" icon @click.stop="cambio = !cambio" class="boton">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>   
+          <v-btn value="recent" icon @click.stop="cambioResponsive = !cambioResponsive" class="botonResponsive">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
       <Nav />
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn value="recent" icon @click.stop="cambio = !cambio" class="boton" v-bind="attrs" v-on="on">
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
-
-        </template>
-        <span>menu</span>
-      </v-tooltip>
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn value="recent" icon @click.stop="cambioResponsive = !cambioResponsive" class="botonResponsive"
-            v-bind="attrs" v-on="on">
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
-        </template>
-        <span>menu</span>
-      </v-tooltip>
 
     </v-app-bar>
     <v-main class="mt-16 ">
       <div>
         <v-row>
-          <NavigationDrawer :geners="generos" :variant="cambio" @actualizarCambio="Cambiar" @activarGenerosAbuelo="activarGeneros" />
-          <NavigationResponsive  :geners="generos" :variante="cambioResponsive" />
+          <NavigationDrawer :miniTop="top" :geners="generos" :variant="cambio" @actualizarCambio="Cambiar" @activarGenerosAbuelo="activarGeneros" />
+          <NavigationResponsive :miniTop="top" :geners="generos" :variante="cambioResponsive"  @activarGenerosAbuelo="activarGeneros"/>
           <v-col :cols="cambio ? colActivo : colNormal" :class="cambio ? 'colDefaultActive' : 'colDefault'"
             class="colDefaultResponsive mt-12">
             <Nuxt />
@@ -49,8 +36,9 @@ export default {
   name: "DefaultLayout",
   data() {
     return {
+      top:[],
       generos: [],
-      cambio: true,
+      cambio: false,
       colNormal: 9,
       colActivo: 11,
       cambioResponsive: false,
@@ -77,13 +65,16 @@ export default {
     Cambiar() {
       this.cambio = true
     },
-    activarGeneros() {
+    async activarGeneros() {
       this.cambio = false
+      const ListaDeGeneros = await axios.get("https://api.jikan.moe/v4/genres/anime");
+     this.generos = ListaDeGeneros.data.data;
     }
   },
   async created() {
-    const ListaDeGeneros = await axios.get("https://api.jikan.moe/v4/genres/anime");
-    this.generos = ListaDeGeneros.data.data;
+    const lista = await axios.get('https://api.jikan.moe/v4/top/anime')
+    this.top = lista.data.data
+   
   },
 }
 </script>
@@ -97,11 +88,11 @@ export default {
 }
 
 .colDefault {
-  margin-left: 1rem;
+  margin-left: 22rem;
 }
 
 .colDefaultActive {
-  margin-left: 28px;
+  margin-left: 6rem;
 }
 
 .v-main__wrap {

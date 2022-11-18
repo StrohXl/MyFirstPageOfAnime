@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-          <div class="tituloAnimes  tituloAnimesResponsive">Lista De Animes</div>
+          <div class="tituloAnimes">Lista De Animes</div>
          <v-row no-gutters justify="space-around" class="pa-12 rowAnimes">
         <template v-for="(Anime, index) in Lista">
             <v-col class="d-flex justify-center pa-2 pb-5  " v-if="index < cantidad">
@@ -42,9 +42,7 @@ export default {
         }
     },
     async created() {
-    const ListaDeGeneros = await axios.get("https://api.jikan.moe/v4/genres/anime");
-    this.generos = ListaDeGeneros.data.data;
-    console.log(ListaDeGeneros.data.data)
+
   },
 }
 </script>

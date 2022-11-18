@@ -1,9 +1,9 @@
 <template>
-  <v-navigation-drawer v-model='drawer' :mini-variant="variant" color="#272727" fixed class="Navigation" permanent
-    width="300px" right>
+  <v-navigation-drawer v-model='drawer' mini-variant-width="80" :mini-variant="variant" color="#272727" fixed class="Navigation" permanent style="overflow: auto; transition: none; "
+    width="340px" >
     <v-list style="position: fixed; width: 100% ; top:60px" nav>
       <template v-for="(item, i) in items">
-        <v-tooltip left>
+        <v-tooltip right>
           <template v-slot:activator="{ on, attrs }">
             <v-hover v-slot="{ hover }">
               <v-list-item :to="item.to" router exact v-bind="attrs" v-on="on" :key="i" @click="cambiarValue">
@@ -21,13 +21,13 @@
       </template>
       
           <Generos :variant="variant" :generos="geners" @activarGenerosPadre="activarGeneros" />
-     
+          <MiniTop class="mt-6" :top="miniTop" :cartaGeneros="variant? 'cartaGenerosActive':'cartaGeneros'" />
     </v-list>
   </v-navigation-drawer>
 </template>
 <script>
-import axios from 'axios';
 import Generos from './Generos.vue';
+import MiniTop from './MiniTop.vue'
 export default {
   name: "NavigationDrawer",
   data() {
@@ -58,7 +58,7 @@ export default {
       ],
     };
   },
-  props: ["variant", "listgroup",'geners'],
+  props: ["variant", "listgroup",'geners','miniTop'],
   methods: {
     cambiarValue() {
       this.$emit("actualizarCambio");
@@ -67,7 +67,7 @@ export default {
       this.$emit('activarGenerosAbuelo')
     }
   },
-  components: { Generos },
+  components: { Generos, MiniTop },
 }
 </script>
 <style >

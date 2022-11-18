@@ -7,11 +7,12 @@
           </v-toolbar-title>
         </v-col>
         <v-col class="mr-16">
-          <v-form style="height: 60px;">
-            <v-text-field class="mt-5" color="white" dense rounded v-model="message" append-outer-icon="mdi-magnify"
+          <v-form style="height: 60px;" class="d-flex">
+            <v-text-field class="mt-2" color="white" dense rounded v-model="message" 
               single-line outlined clear-icon="mdi-close-circle" clearable placeholder="Buscar" type="text"
-              @click:append="toggleMarker" @click:append-outer="sendMessage" @click:clear="clearMessage"></v-text-field>
-              
+              @click:append="toggleMarker" @click:append-outer="sendMessage" @click:clear="clearMessage">
+            </v-text-field>
+              <v-btn text color="#272727" fab @click="sendMessage" :to="`/Search/` + message" router exact light><v-icon class="text-h4 white--text">mdi-magnify</v-icon></v-btn>
           </v-form>
         </v-col>
       </v-row>
@@ -39,7 +40,8 @@ export default {
       this.marker = !this.marker
     },
     sendMessage() {
-
+      
+      console.log(this.message)
       this.clearMessage()
     },
     clearMessage() {
