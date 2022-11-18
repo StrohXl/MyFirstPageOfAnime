@@ -1,5 +1,4 @@
 <template>
-
   <v-app>
     <v-app-bar class="pl-5 pr-5" style="top: 0; z-index: 1000;" color="dark" fixed elevation="0">    
           <v-btn value="recent" icon @click.stop="cambio = !cambio" class="boton">
@@ -9,11 +8,11 @@
             <v-icon>mdi-menu</v-icon>
           </v-btn>
       <Nav />
-
+  
     </v-app-bar>
     <v-main class="mt-16 ">
       <div>
-        <v-row>
+        <v-row class="pb-10">
           <NavigationDrawer :miniTop="top" :geners="generos" :variant="cambio" @actualizarCambio="Cambiar" @activarGenerosAbuelo="activarGeneros" />
           <NavigationResponsive :miniTop="top" :geners="generos" :variante="cambioResponsive"  @activarGenerosAbuelo="activarGeneros"/>
           <v-col :cols="cambio ? colActivo : colNormal" :class="cambio ? 'colDefaultActive' : 'colDefault'"
@@ -28,14 +27,17 @@
 
 </template>
 <script>
+import Search from '../components/Search.vue';
 import NavigationDrawer from '../components/NavigationDrawer.vue';
 import Nav from '../components/Nav.vue';
 import NavigationResponsive from '../components/NavigationResponsive.vue';
 import axios from 'axios';
 export default {
   name: "DefaultLayout",
+  
   data() {
     return {
+      
       top:[],
       generos: [],
       cambio: false,
@@ -49,7 +51,15 @@ export default {
   components: {
     Nav,
     NavigationDrawer,
-    NavigationResponsive
+    NavigationResponsive,
+    Search
+  },
+ async mounted(){
+    window.addEventListener('resize', this.CheckScreen);
+     this.CheckScreen();
+    const lista = await axios.get('https://api.jikan.moe/v4/top/anime')
+    this.top = lista.data.data
+
   },
   methods: {
     CheckScreen() {
@@ -71,11 +81,7 @@ export default {
      this.generos = ListaDeGeneros.data.data;
     }
   },
-  async created() {
-    const lista = await axios.get('https://api.jikan.moe/v4/top/anime')
-    this.top = lista.data.data
-   
-  },
+
 }
 </script>
 <style>
@@ -115,6 +121,12 @@ export default {
   .NavigationR {
     display: block !important;
   }
+  .tituloNav{
+    display: none !important;
+  }
+  .colDefaultActive {
+  margin-left: 2rem;
+}
 
   .tituloIntersectado {
     font-size: 40px !important;

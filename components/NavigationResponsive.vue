@@ -1,5 +1,5 @@
 <template >
- <v-navigation-drawer  temporary v-model='variante' style="overflow: auto;" fixed color="#272727" class="NavigationR" left >
+ <v-navigation-drawer  temporary v-model='variante' style="overflow: auto; " width="340px" fixed color="#272727" class="NavigationR" left >
       <v-list style="top: 60px; position: fixed;width: 100%;">
         <v-hover v-slot="{ hover }" v-for="(item, i) in items" :key="i">
           <v-list-item :to="item.to" router exact>

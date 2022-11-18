@@ -5,7 +5,7 @@
     </v-toolbar>
     <v-list color="white" >
       <template v-for="(anime, index) in top">
-        <v-list-item  :value="index" v-if="index <5" class="mt-2 listItem" :to="`/`+ anime.mal_id" router exact>
+        <v-list-item  :value="index" v-if="index <5" class="mt-2 listItem" :to="`/Anime/`+ anime.mal_id" router exact>
           <v-row>
 
              <v-col cols="10">
@@ -38,9 +38,6 @@ export default{
     }
   },
   props:['cartaGeneros','top'],
-  async created() {
-    
-  },
 }
 
 </script>

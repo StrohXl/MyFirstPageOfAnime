@@ -4,7 +4,7 @@
         <v-row class="ma-0 resultados">
                 <template v-for="(Anime, index) in animes" >
                     <v-col class="d-flex justify-center pa-4" >
-                        <v-card width="200px" style="min-height:100px;" class="carta" tile :to="`/`+ Anime.mal_id" router exact >
+                        <v-card width="200px" style="min-height:100px;" class="carta" tile :to="`/Anime/`+ Anime.mal_id" router exact >
                             <div style="height: 170px; " class="contentImg"  >
                                 <div class="play" style="height: 170px;">
                                     <v-icon class="text-h1 blue--text">mdi-play-circle</v-icon>
@@ -27,7 +27,7 @@ export default {
             animes:[]
         }
     },
-    async created(){
+    async mounted(){
       const url = await axios.get('https://api.jikan.moe/v4/anime?q=' + this.$route.params.id + `&sfw`)
       console.log(url.data.data)
         this.animes= url.data.data

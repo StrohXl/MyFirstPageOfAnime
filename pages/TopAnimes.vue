@@ -21,7 +21,7 @@
             </div >
             
         </v-col>
-        <v-btn class="mt-16" color="blue" :to="`/`+ anime.mal_id" route exact >Ver</v-btn>
+        <v-btn class="mt-16" color="blue" :to="`/Anime/`+ anime.mal_id" route exact >Ver</v-btn>
 
     </v-row>
     
@@ -37,7 +37,7 @@ export default {
       topCompleto:[],
     };
   },
-  async created() {
+  async mounted() {
     const listaCompleta = await axios.get('https://api.jikan.moe/v4/top/anime')
     this.topCompleto = listaCompleta.data.data
    

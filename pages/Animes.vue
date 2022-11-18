@@ -4,7 +4,7 @@
          <v-row no-gutters justify="space-around" class="pa-12 rowAnimes">
         <template v-for="(Anime, index) in Lista">
             <v-col class="d-flex justify-center pa-2 pb-5  " v-if="index < cantidad">
-                <v-card width="200" height="300px" tile class="cartaAnimes" :to="`/` + index" route exact>
+                <v-card width="200" height="300px" tile class="cartaAnimes" :to="`/Anime/` + index" route exact>
                     <div style="height: 220px;" class="contentImg">
                         <div class="play play-active" style="height:240px;">
                             <v-icon color="blue" class="text-h1">mdi-play-circle</v-icon>
@@ -41,9 +41,6 @@ export default {
             this.cantidad = this.cantidad + 40
         }
     },
-    async created() {
-
-  },
 }
 </script>
 <style>

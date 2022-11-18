@@ -81,25 +81,16 @@ export default {
             anime: {},
             imagen: '',
             ListEpisodios: [],
-
         }
     },
-    async created() {
+    async mounted() {
         const url = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id)
         this.anime = url.data.data
-
         const imagen2 = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id)
         this.imagen = imagen2.data.data.images.webp.image_url
         const Episodios = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id + '/episodes')
         this.ListEpisodios = Episodios.data.data
-        
-       
-
-
-
     }
-
-
 }
 
 </script>

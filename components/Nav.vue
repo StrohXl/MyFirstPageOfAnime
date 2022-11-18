@@ -2,40 +2,53 @@
       <v-row>
         <v-col class="d-flex align-center"  >
           
-          <v-toolbar-title class="blue--text text-h4 d-flex align-center ml-3">Vue
+          <v-toolbar-title class="tituloNav">Vue
             <span class="white--text">Anime</span>
           </v-toolbar-title>
         </v-col>
         <v-col class="mr-16">
-          <v-form style="height: 60px;" class="d-flex">
-            <v-text-field class="mt-2" color="white" dense rounded v-model="message" 
-              single-line outlined clear-icon="mdi-close-circle" clearable placeholder="Buscar" type="text"
-              @click:append="toggleMarker" @click:append-outer="sendMessage" @click:clear="clearMessage">
-            </v-text-field>
-              <v-btn text color="#272727" fab @click="sendMessage" :to="`/Search/` + message" router exact light><v-icon class="text-h4 white--text">mdi-magnify</v-icon></v-btn>
-          </v-form>
+        <Search :searchValue='value'/>
         </v-col>
+   
       </v-row>
 </template>
 <script>
+import Search from './Search.vue';
 import NavigationDrawer from './NavigationDrawer.vue';
 export default {
   name: "Nav",
   data() {
     return {
-   
       password: 'Password',
       show: false,
       message: '',
       iconIndex: 0,
+      value: true,
 
     };
   },
+  mounted(){
+    window.addEventListener('resize', this.CheckScreen);
+     this.CheckScreen();
+  },
+
 
   components: {
-    NavigationDrawer
+    NavigationDrawer,
+    Search
   },
   methods: {
+    CheckScreen() {
+      this.windowWidth = window.innerWidth;
+      if (this.windowWidth <= 750) {
+        this.value = true;
+        return;
+      }
+      else{
+        this.value = false;
+        return;
+      }
+    },
     toggleMarker() {
       this.marker = !this.marker
     },
@@ -56,6 +69,18 @@ export default {
 }
 </script>
 <style >
+.tituloNav{
+  color: var(--color-blue);
+  font-size: 35px;
+  display: flex;
+  margin-left: 15px;
+}
+@media (min-width:350px)and (max-width:750px){
+  .tituloNav{
+    display: none !important;
+  }
+}
+
 .botones {
   color: #fff !important;
   font-size: 20px !important;

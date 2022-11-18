@@ -2,21 +2,20 @@
         <v-row class="mb-0">
             <v-col>
                 <Carousel class="mb-12" />
-                <div class="d-flex justify-center titulo align-center">
-                    <h1 class="tituloIntersectado">Animes Populares
-                    </h1>
-                </div>
                 <ListaDeAnimes />
+                <ListaDeMangas/>
             </v-col>
 
         </v-row>
 
 </template>
 <script >
+import ListaDeMangas from '../components/ListaDeMangas.vue';
+
 
 export default {
-    name: "IndexPage"
-
+    name: "IndexPage",
+    components: { ListaDeMangas }
 }
 
 </script>
