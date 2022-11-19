@@ -42,11 +42,7 @@ export default {
                     title: "Top Animes",
                     to: "/TopAnimes"
                 },
-                {
-                    icon: "mdi-access-point",
-                    title: "Emision",
-                    to: "/Emision"
-                }
+    
             ],
         };
     },

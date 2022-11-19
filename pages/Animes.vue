@@ -2,45 +2,63 @@
     <div>
           <div class="tituloAnimes">Lista De Animes</div>
          <v-row no-gutters justify="space-around" class="pa-12 rowAnimes">
-        <template v-for="(Anime, index) in Lista">
-            <v-col class="d-flex justify-center pa-2 pb-5  " v-if="index < cantidad">
-                <v-card width="200" height="300px" tile class="cartaAnimes" :to="`/Anime/` + index" route exact>
+        <template v-for="(anime, index) in aleatorio">
+            <v-col class="d-flex justify-center pa-2 pb-5 " v-if="index < cantidad">
+                <v-card width="200" height="300px" tile class="cartaAnimes" tile :to="`/Anime/`+ anime.entry[0].mal_id" router exact>
                     <div style="height: 220px;" class="contentImg">
                         <div class="play play-active" style="height:240px;">
                             <v-icon color="blue" class="text-h1">mdi-play-circle</v-icon>
                         </div>
-                        <img :src="Anime.src" class="imagen">
+                        <img :src="anime.entry[0].images.jpg.image_url" class="imagen">
                     </div>
                     <v-card-title class="text-subtitle-2" >
-                        {{ Anime.name }}
+                        {{anime.entry[0].title}}
+                    </v-card-title>
+                </v-card>
+            </v-col>
+            <v-col class="d-flex justify-center pa-2 pb-5 " v-if="index < cantidad">
+                <v-card width="200" height="300px" tile class="cartaAnimes" tile :to="`/Anime/`+ anime.entry[1].mal_id" router exact>
+                    <div style="height: 220px;" class="contentImg">
+                        <div class="play play-active" style="height:240px;">
+                            <v-icon color="blue" class="text-h1">mdi-play-circle</v-icon>
+                        </div>
+                        <img :src="anime.entry[1].images.jpg.image_url" class="imagen">
+                    </div>
+                    <v-card-title class="text-subtitle-2" >
+                        {{anime.entry[1].title}}
                     </v-card-title>
                 </v-card>
             </v-col>
         </template>
+        <v-col cols="10">
           <div class="text-center buttomAnimes"  >
-        <v-btn color="blue" class="ma-3" @click="aumentar" >Ver mas</v-btn>
-    </div>
+         <v-btn color="blue" class="ma-3" @click="aumentar" >Ver mas</v-btn>
+        </div>
+    </v-col>
     </v-row>
   
     </div>
 </template>
 <script>
-import ListaDeAnimes from '../json/Lista1.json';
 import axios from 'axios'
 export default {
     name: "Animes",
     data() {
         return {
-            Lista: ListaDeAnimes,
-            cantidad: 40,
-            generos: []
+            aleatorio: [],
+            cantidad: 15,
         }
     },
     methods: {
         aumentar() {
-            this.cantidad = this.cantidad + 40
+            this.cantidad = this.cantidad + 15
         }
     },
+    async mounted(){
+    const ale = await axios.get('https://api.jikan.moe/v4/recommendations/anime')
+    this.aleatorio = ale.data.data
+
+  }
 }
 </script>
 <style>
