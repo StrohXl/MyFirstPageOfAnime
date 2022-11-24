@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-          <div class="tituloAnimes">Lista De Animes</div>
+          <div class="tituloAnimes">Lista De Animessssssssss</div>
          <v-row no-gutters justify="space-around" class="pa-12 rowAnimes">
         <template v-for="(anime, index) in aleatorio">
             <v-col class="d-flex justify-center pa-2 pb-5 " v-if="index < cantidad">
