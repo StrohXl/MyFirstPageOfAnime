@@ -30,12 +30,12 @@
 
 <script >
 import axios from 'axios';
-import ListaDeAnimes from '../json/ListaDeAnimes.json'
+
 export default {
   name: 'Carousel',
   data() {
     return {
-      Lista: ListaDeAnimes,
+
       aleatorio:[]
     }
   },

@@ -76,8 +76,7 @@ export default{
     z-index: 1;
     height: 100%;
     width: 100%;
-
-    border-bottom: 2px solid var(--color-negro);
+    border-bottom: 4px solid var(--color-negro);
 }
 
 .ver {

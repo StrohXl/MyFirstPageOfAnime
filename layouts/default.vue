@@ -102,11 +102,7 @@ export default {
 }
 
 .v-main__wrap {
-  background-image: url(../static/978587.png);
-
-  background-size: 100% 100vh;
-  background-attachment: fixed;
-
+  background-color: #111;
 }
 
 .NavigationR {
@@ -130,7 +126,9 @@ export default {
 
   .tituloIntersectado {
     font-size: 40px !important;
+  
   }
+
 
   .colDefaultResponsive {
     margin-right: 2rem;

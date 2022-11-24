@@ -22,16 +22,18 @@ export default {
 <style>
 
 .tituloIntersectado {
-    color: black !important;
+    color: #000 !important;
     font-size: 80px;
     font-family: 'Island Moments';
     padding-bottom: 0px;
+
 }
 
 .titulo {
     border: 4px solid var(--color-negro);
     height: 80px;
-    background-color: var(--color-blanco-transparente);
+    height: 100px;
+    background-color: #fff;
 }
 
 </style>

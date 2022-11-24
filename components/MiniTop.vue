@@ -28,13 +28,12 @@
 </template>
 
 <script >
-import ListaDeAnimes from '../json/Lista1.json'
+
 export default{
   name: 'MiniTop',
   data(){
     return{
-      lista: ListaDeAnimes,
-   
+
     }
   },
   props:['cartaGeneros','top'],
