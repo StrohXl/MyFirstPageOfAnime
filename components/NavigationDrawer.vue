@@ -1,30 +1,3 @@
-<template>
-  <v-navigation-drawer v-model='drawer' mini-variant-width="80" :mini-variant="variant" color="#272727" fixed class="Navigation" permanent style="overflow: auto; transition: none; "
-    width="340px" >
-    <v-list style="position: fixed; width: 100% ; top:60px" nav>
-      <template v-for="(item, i) in items">
-        <v-tooltip right>
-          <template v-slot:activator="{ on, attrs }">
-            <v-hover v-slot="{ hover }">
-              <v-list-item :to="item.to" router exact v-bind="attrs" v-on="on" :key="i" @click="cambiarValue">
-                <v-list-item-action>
-                  <v-icon :class="`${hover ? 'blue--text' : ''}`">{{ item.icon }}</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title :class="hover ? 'blue--text' : ''">{{ item.title }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-hover>
-          </template>
-          <span>{{ item.title }}</span>
-        </v-tooltip>
-      </template>
-      
-          <Generos :variant="variant" :generos="geners" @activarGenerosPadre="activarGeneros" />
-          <MiniTop class="mt-6" :top="miniTop" :cartaGeneros="variant? 'cartaGenerosActive':'cartaGeneros'" />
-    </v-list>
-  </v-navigation-drawer>
-</template>
 <script>
 import Generos from './Generos.vue';
 import MiniTop from './MiniTop.vue'
@@ -43,7 +16,7 @@ export default {
         {
           icon: "mdi-step-forward",
           title: "Animes",
-          to: "/Animes"
+          to: "/Animes/page/1"
         },
         {
           icon: "mdi-star-settings-outline",
@@ -54,7 +27,7 @@ export default {
       ],
     };
   },
-  props: ["variant", "listgroup",'geners','miniTop'],
+  props: ["variant", "listgroup"],
   methods: {
     cambiarValue() {
       this.$emit("actualizarCambio");
@@ -66,14 +39,60 @@ export default {
   components: { Generos, MiniTop },
 }
 </script>
-<style >
-.Navigation {
-  display: none !important;
-}
 
+<template>
+  <v-navigation-drawer v-model='drawer' mini-variant-width="80" :mini-variant="variant" color="#272727" fixed
+    class="Navigation" permanent  width="340px">
+    <v-list style="position: fixed; width: 100% ; top:60px" nav>
+      <template v-for="(item, i) in items">
+        <v-tooltip right v-if="variant == true">
+          <template v-slot:activator="{ on, attrs }">
+            <v-hover v-slot="{ hover }">
+              <v-list-item :to="item.to" router exact v-bind="attrs" v-on="on" :key="i" @click="cambiarValue">
+                <v-list-item-action>
+                  <v-icon :class="`${hover ? 'blue--text' : ''}`">{{ item.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title :class="hover ? 'blue--text' : ''">{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-hover>
+          </template>
+          <span>{{ item.title }}</span>
+        </v-tooltip>
+        <v-hover v-slot="{ hover }" v-if="variant == false">
+          <v-list-item :to="item.to" router exact  :key="i" @click="cambiarValue">
+            <v-list-item-action>
+              <v-icon :class="`${hover ? 'blue--text' : ''}`">{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title :class="hover ? 'blue--text' : ''">{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-hover>
+      </template>
+      <MiniTop class="mt-6" :cartaGeneros="variant ? 'cartaGenerosActive' : 'cartaGeneros'" />
+    </v-list>
+  </v-navigation-drawer>
+</template>
+
+<style >
+ .Navigation {
+    display: none !important;
+
+  }
 @media (min-width:751px) {
   .Navigation {
     display: block !important;
+    overflow: hidden;
+    transition: none;
+  }
+  .Navigation:hover{
+    overflow: auto;
+
+  }
+  .v-navigation-drawer__border{
+    background-color: #00000000 !important;
   }
 }
 </style>

@@ -1,8 +1,33 @@
+<script >
+import axios from 'axios'
+export default {
+    data() {
+        return {
+            anime: [],
+            imagen: '',
+            ListEpisodios: [],
+        }
+    },
+    async mounted() {
+        this.LoadData()
+    },
+    methods: {
+        async LoadData() {
+            const anime = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id)
+            this.anime = anime.data.data
+            console.log(anime.data.data)
+            this.imagen = anime.data.data.images.jpg.large_image_url
+        }
+    }
+}
+
+</script>
+
 <template lang="">
     <v-container class="black--text containerId " height="600px">
     <v-row>
          <v-col cols="4">
-             <img  width="300px" height="500px" :src="imagen"></img>
+            <img :src='imagen' />
              <v-rating
                small
                  :length="10"
@@ -54,52 +79,10 @@
     <v-card-title primary-title>
             Episodios
         </v-card-title>
-    <v-row>
-
-   <template v-for="(item, index) in ListEpisodios" cols="3">
-         <v-col v-if="item.url !== null "  > 
-            <div style="border: 2px solid black; " >
-              <v-card-title primary-title>
-             Capitulo: {{item.mal_id}}
-              </v-card-title>
-            <v-img :src="imagen" height="200px"></v-img>
-              <v-card-title primary-title>
-             {{item.title}}
-          </v-card-title>
-             </div>
-         </v-col>
-   </template>
-    </v-row>
-
     </v-container>
 </template>
-<script >
-import axios from 'axios'
-export default {
-    data() {
-        return {
-            anime: {},
-            imagen: '',
-            ListEpisodios: [],
-        }
-    },
-    async mounted() {
-        const url = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id)
-        this.anime = url.data.data
-        const imagen2 = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id)
-        this.imagen = imagen2.data.data.images.webp.image_url
-        const Episodios = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id + '/episodes')
-        this.ListEpisodios = Episodios.data.data
-    }
-}
 
-</script>
 <style >
-.containerId {
-    border: 4px solid var(--color-negro);
-    background-color: #fff;
-}
-
 .valueLi {
     list-style: none;
 }

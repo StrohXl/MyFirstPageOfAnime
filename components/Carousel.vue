@@ -1,94 +1,79 @@
-<template>
-    <v-carousel cycle height="400px" interval="3500" class="carousel" show-arrows-on-hover>
-      <template v-slot:prev="{ on, attrs }">
-        <v-btn tile v-bind="attrs" v-on="on"  class="botonNuevo">
-          <v-icon class="text-h5 black--text">mdi-chevron-left</v-icon>
-        </v-btn>
-      </template>
-      <template v-slot:next="{ on, attrs }">
-        <v-btn tile v-bind="attrs" v-on="on"  class="botonNuevo">
-          <v-icon class="text-h5 black--text">mdi-chevron-right</v-icon>
-        </v-btn>
-      </template>
-      <template v-for="(anime, i) in aleatorio">
-        <v-carousel-item v-if="i > 50 && i <55 " class="Content-Ver " >
-              <v-card-title primary-title class="tituloAnimeCarousel">
-               {{anime.entry[0].title}}
-              </v-card-title>
-            <img :src="anime.entry[0].images.jpg.image_url" alt="" class="foto " width="100%" height="100%">
-            <v-btn tile class="VerAnime" :to="`/Anime/` + anime.entry[0].mal_id" router exact>
-              <div >Ver<v-icon style="font-size: 22px;">mdi-chevron-right</v-icon>
-              </div>
-            </v-btn>
-      
-        </v-carousel-item>
-  
-      </template>
-    </v-carousel>
-   
-</template>
-
 <script >
 import axios from 'axios';
-
 export default {
   name: 'Carousel',
   data() {
     return {
-
-      aleatorio:[]
+      animes: []
     }
   },
-  async mounted(){
-    const ale = await axios.get('https://api.jikan.moe/v4/recommendations/anime')
-    this.aleatorio = ale.data.data
-    console.log(ale.data)
-  
+  async mounted() {
+    this.emision()
+  },
+  methods: {
+    async emision() {
+      const animes = await axios.get('https://api.jikan.moe/v4/seasons/now')
+      this.animes = animes.data.data
+    }
   }
 }
 </script>
-<style>
-.tituloAnimeCarousel{
-  background-color: rgba(20, 21, 98, 0.35);
-  position: absolute;
-  z-index: 100;
-  font-size: 3rem;
-  margin-left: 10px;
-  margin-top: 10px;
-  width: 50%;
-  color: #fff;
-  font-weight: 300;
-}
-.botonNuevo{
-  background: #fff !important;
-  width: 20px !important;
-  border: 2px solid var(--color-negro);
-  transition-property: opacity;
-  transition-duration: 0.2s;
-}
-.carousel{
-  border: 4px solid var(--color-negro);
-}
+<template>
+  <v-carousel cycle  interval="3500" class="carousel" show-arrows-on-hover>
+    <template v-for="(anime, i) in animes">
+      <nuxt-link :to="`/Anime/${anime.mal_id}`">
+        <v-carousel-item v-if="i < 7" class="Content-Ver ">
+          <v-card-title primary-title class="tituloAnimeCarousel">
+            {{ anime.title }}
+          </v-card-title>
+          <img :src="anime.trailer.images.maximum_image_url" alt="" class="carousel-image">
+        </v-carousel-item>
+      </nuxt-link>
+    </template>
+  </v-carousel>
+</template>
 
-.foto{
+<style>
+.foto {
   position: absolute;
   width: 100%;
   height: 100%;
-  
-}
-.VerAnime{
-  border: 2px solid var(--color-negro) !important;
-  position: absolute;
-  bottom: 60px;
-  right: 16px;
 }
 
-.VerAnime:hover {
-  background-color: white !important;
-  color: var(--color-negro);
+.v-carousel__controls {
+  height: 30px !important;
 }
 
 .VerAnime:hover a {
   color: var(--color-negro);
+}
+.carousel{
+  height: 250px !important;
+}
+.carousel-image{
+width: 100%;
+height: 250px !important
+}
+@media (min-width: 300px) {
+  .tituloAnimeCarousel {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3rem;
+    position: absolute;
+    z-index: 100;
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+    width: 100%;
+    transition-property: background-color color;
+    transition-duration: 0.5s;
+    font-weight: bold;
+    opacity: 0;
+    color: #fff;
+  }
+
+  .carousel:hover .tituloAnimeCarousel {
+    background-color: #00000096;
+    opacity: 1;
+  }
+
 }
 </style>

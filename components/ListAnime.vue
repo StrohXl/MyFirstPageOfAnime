@@ -64,7 +64,7 @@ export default{
 }
 
 .carta {
-    border: 4px solid var(--color-negro);
+
     background-color: rgb(255, 255, 255) !important;
 }
 
@@ -76,7 +76,6 @@ export default{
     z-index: 1;
     height: 100%;
     width: 100%;
-    border-bottom: 4px solid var(--color-negro);
 }
 
 .ver {

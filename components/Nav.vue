@@ -1,20 +1,5 @@
-<template>
-      <v-row>
-        <v-col class="d-flex align-center"  >
-          
-          <v-toolbar-title class="tituloNav">Vue
-            <span class="white--text">Anime</span>
-          </v-toolbar-title>
-        </v-col>
-        <v-col class="mr-16">
-        <Search :searchValue='value'/>
-        </v-col>
-   
-      </v-row>
-</template>
 <script>
 import Search from './Search.vue';
-import NavigationDrawer from './NavigationDrawer.vue';
 export default {
   name: "Nav",
   data() {
@@ -27,14 +12,12 @@ export default {
 
     };
   },
-  mounted(){
+  mounted() {
     window.addEventListener('resize', this.CheckScreen);
-     this.CheckScreen();
+    this.CheckScreen();
   },
 
-
   components: {
-    NavigationDrawer,
     Search
   },
   methods: {
@@ -44,7 +27,7 @@ export default {
         this.value = true;
         return;
       }
-      else{
+      else {
         this.value = false;
         return;
       }
@@ -53,7 +36,6 @@ export default {
       this.marker = !this.marker
     },
     sendMessage() {
-      
       console.log(this.message)
       this.clearMessage()
     },
@@ -68,16 +50,39 @@ export default {
   },
 }
 </script>
+
+<template>
+  <v-row>
+    <v-col class="d-flex align-center">
+
+      <v-toolbar-title class="tituloNav">VUE
+        <span class="white--text">ANIME</span>
+      </v-toolbar-title>
+    </v-col>
+    <v-col class=" d-flex justify-end">
+      <Search :searchValue='value' />
+    </v-col>
+
+  </v-row>
+</template>
+
 <style >
-.tituloNav{
+
+.tituloNav {
+  font-weight: bold;
   color: var(--color-blue);
-  font-size: 35px;
+  font-size: 20px;
   display: flex;
   margin-left: 15px;
 }
-@media (min-width:350px)and (max-width:750px){
+@media(min-width: 600px){
   .tituloNav{
-    display: none !important;
+    font-size: 25px;
+  }
+}
+@media (min-width: 1264px) {
+  .tituloNav{
+    font-size: 30px;
   }
 }
 

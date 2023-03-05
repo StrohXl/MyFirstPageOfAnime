@@ -36,17 +36,10 @@ export default {
 </script>
 <style >
     .tituloBusqueda {  
-    background-color: #fff;
     text-align: center;
-    border: 4px solid var(--color-negro) !important;
     color: var(--color-negro);
     font-size: 7rem;
     font-family: 'Island Moments';
 }
-.resultados{
-    background-color: #fff;
-    border: 4px solid var(--color-negro);
-    border-top: none;
-  
-}
+
 </style>

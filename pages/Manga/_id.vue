@@ -77,10 +77,6 @@ export default {
 
 </script>
 <style >
-.containerId {
-    border: 4px solid var(--color-negro);
-    background-color: #fff;
-}
 
 .valueLi {
     list-style: none;
