@@ -4,6 +4,7 @@
             <Carousel />
             <ListAnimeAndManga contenido="/seasons/now" title="Animes en Emision" Direccion="Anime"  cantidad="8" />
             <ListAnimeAndManga contenido="/anime" title="Animes" Direccion="Anime" cantidad="10"/>
+            <ListAnimeAndManga contenido="/manga" title="Mangas" Direccion="Manga" cantidad="10"/>
 
         </v-col>
 
