@@ -58,26 +58,38 @@ export default {
 }
 
 .tituloAnimeCarousel {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 3rem;
+  font-size: 0.8rem;
   position: absolute;
   z-index: 100;
-  padding-left: 1.5rem;
-  padding-top: 1.5rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
   width: 100%;
+  height: 10%;
+  overflow: hidden;
   transition-property: background-color color;
   transition-duration: 0.5s;
   font-weight: bold;
   opacity: 0;
   color: #fff;
+  background-color: #00000096;
 }
 
 .carousel:hover .tituloAnimeCarousel {
-  background-color: #00000096;
   opacity: 1;
+}
+.v-carousel__controls__item{
+  width: 15px !important;
+  height: 15px !important;
 }
 
 @media (min-width: 600px) {
+  .v-carousel__controls__item{
+  width: 28px !important;
+  height: 28px !important;
+}
+  .tituloAnimeCarousel {
+  font-size: 1.2rem;
+}
   .carousel {
     height: 280px !important;
   }
@@ -87,6 +99,9 @@ export default {
 
 }
 @media (min-width: 1264px) {
+  .tituloAnimeCarousel {
+  font-size: 1.5rem;
+}
   .carousel {
     height: 350px !important;
   }
