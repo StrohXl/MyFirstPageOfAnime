@@ -2,7 +2,7 @@
     <v-row class="mb-0" style="width: 100%;">
         <v-col>
             <Carousel />
-            <ListAnimeAndManga contenido="/seasons/now" title="Animes en Emision" Direccion="Anime"  cantidad="8" />
+            <ListAnimeAndManga contenido="/seasons/now" title="Animes en Emision" Direccion="Anime"  cantidad="10" />
             <ListAnimeAndManga contenido="/anime" title="Animes" Direccion="Anime" cantidad="10"/>
             <ListAnimeAndManga contenido="/manga" title="Mangas" Direccion="Manga" cantidad="10"/>
 

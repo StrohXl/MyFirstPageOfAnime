@@ -110,4 +110,13 @@ export default {
   }
 
 }
+@media (min-width: 1664px) {
+  .carousel-image {
+    height: 400px  ;
+  }
+  .carousel {
+    height: 400px !important;
+  }
+
+}
 </style>

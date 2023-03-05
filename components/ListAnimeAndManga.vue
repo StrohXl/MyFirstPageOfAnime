@@ -7,7 +7,6 @@ export default {
         return {
             data: [],
             ApiUrl: 'https://api.jikan.moe/v4',
-            image: ''
         }
     },
 
@@ -21,9 +20,6 @@ export default {
                     page: this.pagina
                 }
             })
-            console.log(this.$route)
-            console.log(auxData.data.data)
-            this.image = auxData.data.data
             this.data = auxData.data.data
         }
     },
@@ -109,12 +105,15 @@ export default {
 }
 @media(min-width:1264px) {
     .col-card {
-        max-width: 25% !important;
-        height: 350px;
+        max-width: 20% !important;
+        height: 300px;
     }
 }
 @media(min-width:1904px) {
-  
+    .col-card {
+   
+        height: 350px;
+    }
 }
 
 .card-score {

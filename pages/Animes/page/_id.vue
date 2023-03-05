@@ -1,7 +1,68 @@
+<script>
+import axios from 'axios';
+export default {
+  name: "Animes",
+  data() {
+    return {
+      data: [],
+      aleatorio: [],
+      cantidad: 15,
+      pagina: 1
+
+    }
+  },
+  methods: {
+    async LoadData() {
+
+      const auxData = await axios.get("https://api.jikan.moe/v4/anime", {
+        params: {
+          page: this.$route.params.id
+        }
+      })
+      this.data = auxData.data.data
+    },
+    cambiarPagina() {
+      this.$router.push(`/Animes/page/${this.pagina}`)
+    }
+
+  },
+  mounted() {
+    this.LoadData()
+
+  }
+
+}
+</script>
+
 <template lang="">
     <div>
-          <ListAnimeAndManga contenido="/anime" title="Animes" Direccion="Anime" :page='pagina' cantidad="25" />
-            <template>
+    <div >
+        <h1 class="content-card-title">
+            Animes
+        </h1>
+        <v-row>
+            <template v-for="(item, index) in data">
+                <v-col v-if="index < 25" class="col-card">
+                    <nuxt-link style="text-decoration: none;" :to='`/Anime/${item.mal_id}`'>
+                        <v-card class="card">
+                            <img :alt="item.title" class="card-image" :src="item.images.jpg.large_image_url" />
+                            <div class="card-body">
+                                <v-card-title class="card-title" primary-title>
+                                    {{ item.title }}
+                                </v-card-title>
+                                <v-card-title class="card-year" primary-title>
+                                    {{ item.year   }}
+                                </v-card-title>
+                                <v-card-title class="card-score" primary-title>
+                                    {{ item.score  }}
+                                </v-card-title>
+                            </div>
+                        </v-card>
+                    </nuxt-link>
+                </v-col>
+            </template>
+        </v-row>
+    </div>
   <div class="text-center">
     <v-container>
       <v-row justify="center">
@@ -10,7 +71,7 @@
             <v-pagination
               v-model="pagina"
               :value=3
-               @input='cambioDePagina'
+               @input='cambiarPagina'
               class="my-4"
               total-visible="10"
               :length="50"
@@ -20,77 +81,10 @@
       </v-row>
     </v-container>
   </div>
-<v-btn outline @click='cambioDePagina' color="primary" dark>text</v-btn>
-</template>
+  
   
     </div>
 </template>
-<script>
-import ListAnimeAndManga from '../../../components/ListAnimeAndManga.vue'
-export default {
-    name: "Animes",
-    data() {
-        return {
-            aleatorio: [],
-            cantidad: 15,
-            pagina: 1
 
-        }
-    },
-    components:{ListAnimeAndManga},
-    methods: {
-        ruta() {
-            this.pagina = this.$route.params.id
-        },
-        cambioDePagina(){
-          alert(this.pagina)
-      
-        }
-    },
-     mounted() {
-      this.ruta()
-      
-    }
-
-}
-</script>
 <style>
-.ver {
-    text-decoration: none;
-    color: green;
-    font-size: 20px;
-}
-
-.play {
-    display: none;
-}
-
-.contentImg:hover .play {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-negro-transparente);
-    height: 190px;
-    width: 100%;
-    position: absolute !important;
-    z-index: 100;
-}
-
-.imagen {
-    transition: 1s all !important;
-    object-fit: fill !important;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-
-}
-
-.tituloAnimes {
-
-    text-align: center;
-    color: var(--color-negro);
-    font-size: 7rem;
-    font-family: 'Island Moments';
-}
 </style>

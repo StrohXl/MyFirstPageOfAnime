@@ -3,7 +3,6 @@ import Search from '../components/Search.vue';
 import NavigationDrawer from '../components/NavigationDrawer.vue';
 import Nav from '../components/Nav.vue';
 import NavigationResponsive from '../components/NavigationResponsive.vue';
-import axios from 'axios';
 export default {
   name: "DefaultLayout",
   data() {
@@ -46,7 +45,7 @@ export default {
     <v-main class="mt-16 ">
       <div>
         <v-row class="row-content">
-          <NavigationDrawer :variant="cambio" @actualizarCambio="Cambiar" />
+          <NavigationDrawer :variant="cambio"  />
           <v-col :class="cambio ? 'colDefaultActive' : 'colDefault'">
             <Nuxt />
           </v-col>
@@ -65,9 +64,10 @@ export default {
   --color-blanco-transparente: rgba(255, 255, 255, 0.774);
 }
 
-.v-application--wrap {
-  background-color: #f7f7f7;
+.row-content {
+  background-color: #efefef;
 }
+
 
 .v-footer {
   margin-top: 2rem;
@@ -84,7 +84,7 @@ export default {
 @media(min-width:750px) {
   .colDefault {
     margin-top: 2rem;
-    margin-left: 23rem;
+    margin-left: 20rem;
   }
 
   .colDefaultActive {
@@ -96,9 +96,7 @@ export default {
 
 
 
-.row-content {
-  background-color: #f7f7f7;
-}
+
 
 .NavigationR {
   display: none !important;

@@ -29,9 +29,6 @@ export default {
   },
   props: ["variant", "listgroup"],
   methods: {
-    cambiarValue() {
-      this.$emit("actualizarCambio");
-    },
     activarGeneros() {
       this.$emit('activarGenerosAbuelo')
     }
@@ -42,13 +39,13 @@ export default {
 
 <template>
   <v-navigation-drawer v-model='drawer' mini-variant-width="80" :mini-variant="variant" color="#272727" fixed
-    class="Navigation" permanent  width="340px">
+    class="Navigation" permanent  width="290px">
     <v-list style="position: fixed; width: 100% ; top:60px" nav>
       <template v-for="(item, i) in items">
         <v-tooltip right v-if="variant == true">
           <template v-slot:activator="{ on, attrs }">
             <v-hover v-slot="{ hover }">
-              <v-list-item :to="item.to" router exact v-bind="attrs" v-on="on" :key="i" @click="cambiarValue">
+              <v-list-item :to="item.to" router exact v-bind="attrs" v-on="on" :key="i" >
                 <v-list-item-action>
                   <v-icon :class="`${hover ? 'blue--text' : ''}`">{{ item.icon }}</v-icon>
                 </v-list-item-action>
@@ -61,7 +58,7 @@ export default {
           <span>{{ item.title }}</span>
         </v-tooltip>
         <v-hover v-slot="{ hover }" v-if="variant == false">
-          <v-list-item :to="item.to" router exact  :key="i" @click="cambiarValue">
+          <v-list-item :to="item.to" router exact  :key="i" >
             <v-list-item-action>
               <v-icon :class="`${hover ? 'blue--text' : ''}`">{{ item.icon }}</v-icon>
             </v-list-item-action>
