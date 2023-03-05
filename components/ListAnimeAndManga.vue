@@ -2,11 +2,12 @@
 import axios from 'axios';
 export default {
     name: 'ListAnimeAndManga',
-    props: ['contenido', 'Direccion', 'title', 'cantidad', 'pagina'],
+    props: ['contenido', 'Direccion', 'title', 'cantidad', 'pagina', 'tipo2'],
     data() {
         return {
             data: [],
             ApiUrl: 'https://api.jikan.moe/v4',
+            image: ''
         }
     },
 
@@ -21,8 +22,9 @@ export default {
                 }
             })
             console.log(this.$route)
-            this.data = auxData.data.data
             console.log(auxData.data.data)
+            this.image = auxData.data.data
+            this.data = auxData.data.data
         }
     },
 }
@@ -36,18 +38,18 @@ export default {
         <v-row>
             <template v-for="(item, index) in data">
                 <v-col v-if="index < cantidad" class="col-card">
-                    <nuxt-link style="text-decoration: none;" :to='`/${Direccion}/${item.mal_id}`'>
+                    <nuxt-link style="text-decoration: none;" :to='`/${Direccion}/${item.mal_id || item.entry.mal_id}`'>
                         <v-card class="card">
-                            <img :alt="item.title" class="card-image" :src="item.images.jpg.large_image_url" />
+                            <img :alt="item.title || item.entry.title" class="card-image" :src="tipo2? item.entry.images.jpg.large_image_url: item.images.jpg.large_image_url" />
                             <div class="card-body">
                                 <v-card-title class="card-title" primary-title>
-                                    {{ item.title }}
+                                    {{ item.title || item.entry.title }}
                                 </v-card-title>
                                 <v-card-title class="card-year" primary-title>
-                                    {{ item.year }}
+                                    {{ item.year || '' }}
                                 </v-card-title>
                                 <v-card-title class="card-score" primary-title>
-                                    {{ item.score }}
+                                    {{ item.score || '' }}
                                 </v-card-title>
                             </div>
                         </v-card>
