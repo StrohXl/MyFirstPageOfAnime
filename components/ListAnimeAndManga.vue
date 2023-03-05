@@ -94,20 +94,20 @@ export default {
 
 @media(min-width:600px) {
     .col-card {
-        width: 30% !important;
+        max-width: 33% !important;
         height: 280px;
     }
     
 }
 @media(min-width:960px) {
     .col-card {
-        width: 25% !important;
+        max-width: 25% !important;
         height: 290px;
     }
 }
 @media(min-width:1264px) {
     .col-card {
-        width: 25% !important;
+        max-width: 25% !important;
         height: 350px;
     }
 }
@@ -141,7 +141,7 @@ export default {
 
 .card-title {
     overflow: hidden;
-    height: 20%;
+    height: 50px;
     font-size: .9rem;
     padding-bottom: 0;
 }
