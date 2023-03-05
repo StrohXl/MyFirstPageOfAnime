@@ -79,7 +79,6 @@ export default {
 <style >
  .Navigation {
     display: none !important;
-
   }
 @media (min-width:751px) {
   .Navigation {

@@ -19,7 +19,7 @@ export default {
 }
 </script>
 <template>
-  <v-carousel cycle  interval="3500" class="carousel" show-arrows-on-hover>
+  <v-carousel cycle interval="3500" class="carousel" show-arrows-on-hover>
     <template v-for="(anime, i) in animes">
       <nuxt-link :to="`/Anime/${anime.mal_id}`">
         <v-carousel-item v-if="i < 7" class="Content-Ver ">
@@ -47,32 +47,51 @@ export default {
 .VerAnime:hover a {
   color: var(--color-negro);
 }
-.carousel{
+
+.carousel {
   height: 250px !important;
 }
-.carousel-image{
-width: 100%;
-height: 250px !important
+
+.carousel-image {
+  width: 100%;
+  height: 250px 
 }
-@media (min-width: 300px) {
-  .tituloAnimeCarousel {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 3rem;
-    position: absolute;
-    z-index: 100;
-    padding-left: 1.5rem;
-    padding-top: 1.5rem;
-    width: 100%;
-    transition-property: background-color color;
-    transition-duration: 0.5s;
-    font-weight: bold;
-    opacity: 0;
-    color: #fff;
+
+.tituloAnimeCarousel {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 3rem;
+  position: absolute;
+  z-index: 100;
+  padding-left: 1.5rem;
+  padding-top: 1.5rem;
+  width: 100%;
+  transition-property: background-color color;
+  transition-duration: 0.5s;
+  font-weight: bold;
+  opacity: 0;
+  color: #fff;
+}
+
+.carousel:hover .tituloAnimeCarousel {
+  background-color: #00000096;
+  opacity: 1;
+}
+
+@media (min-width: 600px) {
+  .carousel {
+    height: 280px !important;
+  }
+  .carousel-image {
+    height: 280px  ;
   }
 
-  .carousel:hover .tituloAnimeCarousel {
-    background-color: #00000096;
-    opacity: 1;
+}
+@media (min-width: 1264px) {
+  .carousel {
+    height: 350px !important;
+  }
+  .carousel-image {
+    height: 350px  ;
   }
 
 }
