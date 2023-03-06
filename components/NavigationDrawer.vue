@@ -55,7 +55,7 @@ export default {
       ],
     };
   },
-  props: ["variant", "listgroup"],
+  props: ["variant"],
   methods: {
     activarGeneros() {
       this.$emit('activarGenerosAbuelo')
@@ -64,14 +64,18 @@ export default {
       this.value = ''
       this.value2 = ''
     },
-    async loadGenres() {
-      const genresAnime = await axios.get('https://api.jikan.moe/v4/genres/anime')
-
-      this.genresAnime = genresAnime.data.data
+    loadGenres() {
+      setTimeout(async () => {
+        const genresAnime = await axios.get('https://api.jikan.moe/v4/genres/anime')
+        this.genresAnime = genresAnime.data.data
+      }, 2000)
     },
-    async loadGenresManga() {
-      const genresManga = await axios.get('https://api.jikan.moe/v4/genres/manga')
-      this.genresManga = genresManga.data.data
+    loadGenresManga() {
+      setTimeout(async () => {
+        const genresManga = await axios.get('https://api.jikan.moe/v4/genres/manga')
+        this.genresManga = genresManga.data.data
+      }, 4000)
+
     },
     cargarTitulo(){
      const titulo = document.querySelectorAll('.v-list-group__header__append-icon')

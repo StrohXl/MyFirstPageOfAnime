@@ -9,6 +9,7 @@ export default {
     return {
       cambio: false,
       cambioResponsive: false,
+      ejecutarNavigation: false,
       colNormal: 9,
       colActivo: 11,
       cambioResponsive: false,
@@ -29,7 +30,12 @@ export default {
   },
   methods: {
     Cambiar() {
-      this.cambio = true
+      this.ejecutarNavigation = false
+      this.cambio = !this.cambio
+    },
+    CambiarResponsive() {
+      this.ejecutarNavigation = true
+      this.cambioResponsive = !this.cambioResponsive
     },
 
     ComprobarRuta() {
@@ -42,10 +48,10 @@ export default {
 <template>
   <v-app>
     <v-app-bar class="pl-5 pr-5" style="top: 0; z-index: 1000;" color="dark" fixed elevation="0">
-      <v-btn value="recent" icon @click.closed="this.cambio = !this.cambio" class="boton">
+      <v-btn value="recent" icon @click="Cambiar" class="boton">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-      <v-btn value="recent" icon @click.closed="this.cambioResponsive = !this.cambioResponsive" class="botonResponsive">
+      <v-btn value="recent" icon @click="CambiarResponsive" class="botonResponsive">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
@@ -55,8 +61,8 @@ export default {
     <v-main class="mt-16 ">
       <div>
         <v-row class="row-content">
-          <NavigationResponsive :variante="cambioResponsive" />
-          <NavigationDrawer :variant="cambio" />
+          <NavigationResponsive v-if="ejecutarNavigation == true" :variante="cambioResponsive" />
+          <NavigationDrawer v-if="ejecutarNavigation == false" :variant="cambio" />
           <v-col :class="cambio ? 'colDefaultActive' : 'colDefault'">
             <Nuxt />
           </v-col>
