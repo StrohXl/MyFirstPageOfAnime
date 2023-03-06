@@ -1,12 +1,16 @@
 <script>
-import Generos from './Generos.vue';
-import MiniTop from './MiniTop.vue'
+import MiniList from './MiniList.vue'
+import axios from 'axios';
 export default {
   name: "NavigationDrawer",
   data() {
     return {
+      value: '',
+      value2: '',
       epale: true,
       drawer: true,
+      genresAnime: [],
+      genresManga: [],
       items: [
         {
           icon: "mdi-home",
@@ -19,11 +23,30 @@ export default {
           to: "/Animes/page/1"
         },
         {
+          icon: "mdi-microsoft",
+          title: "Generos",
+          to: "/Animes/genres/1"
+        },
+        {
           icon: "mdi-star-settings-outline",
           title: "Top Animes",
-          to: "/TopAnimes"
+          to: "/Animes/TopAnimes/1"
         },
-
+        {
+          icon: "mdi-book-open-page-variant",
+          title: "Mangas",
+          to: "/Mangas/page/1"
+        },
+        {
+          icon: "mdi-microsoft",
+          title: "Generos",
+          to: "/Mangas/genres/1"
+        },
+        {
+          icon: "mdi-star-settings-outline",
+          title: "Top Mangas",
+          to: "/TopMangas"
+        },
       ],
     };
   },
@@ -31,63 +54,119 @@ export default {
   methods: {
     activarGeneros() {
       this.$emit('activarGenerosAbuelo')
+    },
+    CerrarSubMenus() {
+      this.value = ''
+      this.value2 = ''
+    },
+    async loadGenres() {
+      const genresAnime = await axios.get('https://api.jikan.moe/v4/genres/anime')
+
+      this.genresAnime = genresAnime.data.data
+    },
+    async loadGenresManga() {
+
+      const genresManga = await axios.get('https://api.jikan.moe/v4/genres/manga')
+      this.genresManga = genresManga.data.data
+    },
+    cargarTitulo(){
+     const titulo = document.querySelectorAll('.v-list-group__header__append-icon')
+     const html = titulo[0].innerHTML
+     const icono = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-microsoft theme--dark"></i>'
+      titulo[0].innerHTML = (icono + 'Generos' + html)
+      titulo[1].innerHTML = (icono + 'Generos' + html)
     }
   },
-  components: { Generos, MiniTop },
+  mounted() {
+    this.loadGenres()
+    this.cargarTitulo()
+    this.loadGenresManga()
+  },
 }
 </script>
 
 <template>
   <v-navigation-drawer v-model='drawer' mini-variant-width="80" :mini-variant="variant" color="#272727" fixed
-    class="Navigation" permanent  width="290px">
-    <v-list style="position: fixed; width: 100% ; top:60px" nav>
+    class="Navigation" permanent width="250px">
+    <v-list style="position: fixed; width: 100% ; top:80px" nav >
       <template v-for="(item, i) in items">
         <v-tooltip right v-if="variant == true">
           <template v-slot:activator="{ on, attrs }">
-            <v-hover v-slot="{ hover }">
-              <v-list-item :to="item.to" router exact v-bind="attrs" v-on="on" :key="i" >
-                <v-list-item-action>
-                  <v-icon :class="`${hover ? 'blue--text' : ''}`">{{ item.icon }}</v-icon>
+            <v-hover v-slot="{ hover }" v-if="item.title == 'Animes' || item.title == 'Inicio' || item.title == 'Mangas'">
+              <v-list-item :to="item.to" router exact v-bind="attrs" v-on="on" :key="i">
+                <v-list-item-action class="mr-1">
+                  <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
-                  <v-list-item-title :class="hover ? 'blue--text' : ''">{{ item.title }}</v-list-item-title>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-hover>
           </template>
           <span>{{ item.title }}</span>
         </v-tooltip>
-        <v-hover v-slot="{ hover }" v-if="variant == false">
-          <v-list-item :to="item.to" router exact  :key="i" >
-            <v-list-item-action>
-              <v-icon :class="`${hover ? 'blue--text' : ''}`">{{ item.icon }}</v-icon>
+      </template>
+      <template v-for="(item, index) in items">
+        <template v-if="variant == false ">
+        
+          <v-list-item @click="CerrarSubMenus" :to="item.to" router exact :key="index" v-if="item.title != 'Generos'">
+            <v-list-item-action class="mr-4">
+              <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title :class="hover ? 'blue--text' : ''">{{ item.title }}</v-list-item-title>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </v-hover>
+        </template>
+          <v-list-group :class="variant != false? 'sub-menu-none': ''" v-if="index == 1" v-model="value" :key="item.title">          
+            <template v-for="(x, index) in genresAnime">
+               <v-list-item @click="CerrarSubMenus" :to="`/Animes/genres/${x.mal_id}`" router exact :key="x.mal_id" v-if="index < 20">
+                 {{ x.name }}
+               </v-list-item>
+
+            </template>
+          </v-list-group>
+          <v-list-group v-if="index == 4" v-model="value2" :key="800" :class="variant != false? 'sub-menu-none': ''" >
+            <template v-for="(x, index) in genresManga">
+              <v-list-item  @click="CerrarSubMenus" :key="x.mal_id" :to="`/Mangas/genres/${x.mal_id}`" router exact v-if="index < 20">
+                {{ x.name }}
+              </v-list-item>
+            </template>
+          </v-list-group>
+
+        <div style="border-bottom: 1px solid #eee;" v-if="index == 0 || index == 3 || index == 6"></div>
       </template>
-      <MiniTop class="mt-6" :cartaGeneros="variant ? 'cartaGenerosActive' : 'cartaGeneros'" />
+      <MiniList :cartaGeneros="variant ? 'cartaGenerosActive' : 'cartaGeneros'" />
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <style >
- .Navigation {
-    display: none !important;
-  }
+.sub-menu-none{
+  display: none !important;
+}
+.Navigation {
+  display: none !important;
+}
+.v-list-group__header__append-icon{
+  display: flex;
+  gap: 1rem;
+}
+.mdi-chevron-down{
+  margin-left: 3rem;
+}
 @media (min-width:751px) {
   .Navigation {
     display: block !important;
     overflow: hidden;
     transition: none;
   }
-  .Navigation:hover{
-    overflow: auto;
 
+  .Navigation:hover {
+    overflow: auto;
   }
-  .v-navigation-drawer__border{
+
+  .v-navigation-drawer__border {
     background-color: #00000000 !important;
   }
 }

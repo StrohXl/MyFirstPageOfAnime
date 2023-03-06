@@ -19,7 +19,7 @@
 </template>
 <script>
 import Generos from './Generos.vue';
-import MiniTop from './MiniTop.vue';
+import MiniTop from './MiniList.vue';
 export default {
   name: "NavigationResponsive",
   data() {
