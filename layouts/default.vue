@@ -8,6 +8,8 @@ export default {
   data() {
     return {
       cambio: false,
+      cambioResponsive: false,
+      ejecutarNavigation: false,
       colNormal: 9,
       colActivo: 11,
       cambioResponsive: false,
@@ -23,11 +25,22 @@ export default {
   },
   async mounted() {
     window.addEventListener('resize', this.CheckScreen);
+    this.ComprobarRuta
+
   },
   methods: {
     Cambiar() {
-      this.cambio = true
+      this.ejecutarNavigation = false
+      this.cambio = !this.cambio
     },
+    CambiarResponsive() {
+      this.ejecutarNavigation = true
+      this.cambioResponsive = !this.cambioResponsive
+    },
+
+    ComprobarRuta() {
+      console.log(this.$route)
+    }
   },
 
 }
@@ -35,7 +48,10 @@ export default {
 <template>
   <v-app>
     <v-app-bar class="pl-5 pr-5" style="top: 0; z-index: 1000;" color="dark" fixed elevation="0">
-      <v-btn value="recent" icon @click.stop="cambio = !cambio" class="boton">
+      <v-btn value="recent" icon @click="Cambiar" class="boton">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
+      <v-btn value="recent" icon @click="CambiarResponsive" class="botonResponsive">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
@@ -45,7 +61,8 @@ export default {
     <v-main class="mt-16 ">
       <div>
         <v-row class="row-content">
-          <NavigationDrawer :variant="cambio"  />
+          <NavigationResponsive v-if="ejecutarNavigation == true" :variante="cambioResponsive" />
+          <NavigationDrawer v-if="ejecutarNavigation == false" :variant="cambio" />
           <v-col :class="cambio ? 'colDefaultActive' : 'colDefault'">
             <Nuxt />
           </v-col>
@@ -57,7 +74,7 @@ export default {
 </template>
 <style>
 :root {
-  --color-blue: #2196F3;
+  --color-blue: #1976d2;
   --color-negro: #272727;
   --color-negro-transparente: rgba(41, 41, 41, 0.671);
   --color-gris: rgb(80, 80, 80);
@@ -73,40 +90,49 @@ export default {
   margin-top: 2rem;
   width: 100vw;
 }
-.colDefaultActive{
+
+.colDefaultActive {
   margin-top: 1rem;
   margin-left: 1rem;
 }
-.colDefault{
+
+.colDefault {
   margin-top: 1rem;
   margin-left: 1rem;
 }
+
+.boton {
+  display: none;
+}
+
 @media(min-width:750px) {
+  .botonResponsive {
+    display: none;
+  }
+
+  .boton {
+    display: block;
+  }
+
   .colDefault {
     margin-top: 2rem;
-    margin-left: 20rem;
+    margin-left: 18rem;
   }
 
   .colDefaultActive {
     margin-top: 2rem;
-    padding: 0 2rem;
+    padding: 1rem 1rem 0;
     margin-left: 7rem;
   }
 }
-
-
-
-
 
 .NavigationR {
   display: none !important;
 }
 
-.botonResponsive {
-  display: none;
-}
 
-@media (min-width:350px) and (max-width:750px) {
+
+@media (min-width:250px) and (max-width:750px) {
   .NavigationR {
     display: block !important;
   }

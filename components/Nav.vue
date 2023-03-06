@@ -36,7 +36,6 @@ export default {
       this.marker = !this.marker
     },
     sendMessage() {
-      console.log(this.message)
       this.clearMessage()
     },
     clearMessage() {

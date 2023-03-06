@@ -14,7 +14,7 @@ export default {
   methods: {
     async LoadData() {
 
-      const auxData = await axios.get("https://api.jikan.moe/v4/anime", {
+      const auxData = await axios.get("https://api.jikan.moe/v4/manga", {
         params: {
           page: this.$route.params.id
         }
@@ -38,7 +38,7 @@ export default {
     <div>
     <div >
         <h1 class="content-card-title">
-            ANIMES
+            Animes
         </h1>
         <v-row>
             <template v-for="(item, index) in data">

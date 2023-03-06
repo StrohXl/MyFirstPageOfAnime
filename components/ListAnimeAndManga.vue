@@ -2,7 +2,7 @@
 import axios from 'axios';
 export default {
     name: 'ListAnimeAndManga',
-    props: ['contenido', 'Direccion', 'title', 'cantidad', 'pagina', 'tipo2'],
+    props: ['contenido', 'Direccion', 'title', 'cantidad', 'pagina', 'tipo2', 'timeout', 'verMas'],
     data() {
         return {
             data: [],
@@ -14,13 +14,16 @@ export default {
         this.LoadData()
     },
     methods: {
-        async LoadData() {
-            const auxData = await axios.get(this.ApiUrl + this.contenido, {
+        LoadData() {
+            setTimeout(async () => {
+                const auxData = await axios.get(this.ApiUrl + this.contenido, {
                 params: {
                     page: this.pagina
                 }
             })
             this.data = auxData.data.data
+        }, this.timeout);
+
         }
     },
 }
@@ -36,7 +39,8 @@ export default {
                 <v-col v-if="index < cantidad" class="col-card">
                     <nuxt-link style="text-decoration: none;" :to='`/${Direccion}/${item.mal_id || item.entry.mal_id}`'>
                         <v-card class="card">
-                            <img :alt="item.title || item.entry.title" class="card-image" :src="tipo2? item.entry.images.jpg.large_image_url: item.images.jpg.large_image_url" />
+                            <img :alt="item.title || item.entry.title" class="card-image"
+                                :src="tipo2 ? item.entry.images.jpg.large_image_url : item.images.jpg.large_image_url" />
                             <div class="card-body">
                                 <v-card-title class="card-title" primary-title>
                                     {{ item.title || item.entry.title }}
@@ -53,20 +57,19 @@ export default {
                 </v-col>
             </template>
         </v-row>
-        <div class="ver-mas">
-            <v-btn color="primary" elevation="5">
-                Ver mas
-
-            </v-btn>
-        </div>
+        <nuxtLink v-if="this.$route.params.id != '/'" :to="verMas" class="ver-mas">
+            <v-btn color="primary">Ver mas</v-btn>
+        </nuxtLink>
     </div>
 </template>
 <style>
+
 .content-card-title {
-    color: #000;
-    font-size: 2rem;
-    border-left: 7px solid var(--color-blue);
-    height: 40px;
+    color: var(--color-negro);
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    border-left: 5px solid var(--color-blue);
     padding-left: 1rem;
     margin-bottom: 2rem;
 }
@@ -74,14 +77,13 @@ export default {
 .ver-mas {
     margin-top: 1rem;
     width: 100%;
-    color: #000;
     display: flex;
     justify-content: end;
 }
 
 .col-card {
     width: 50% !important;
-    height: 250px;
+    height: 150px;
     flex-basis: auto !important;
 }
 
@@ -93,25 +95,28 @@ export default {
 @media(min-width:600px) {
     .col-card {
         max-width: 33% !important;
-        height: 280px;
+        height: 180px;
     }
-    
+
 }
+
 @media(min-width:960px) {
     .col-card {
         max-width: 25% !important;
-        height: 290px;
+        height: 200px;
     }
 }
+
 @media(min-width:1264px) {
     .col-card {
         max-width: 20% !important;
-        height: 300px;
+
     }
 }
+
 @media(min-width:1904px) {
     .col-card {
-   
+
         height: 350px;
     }
 }
@@ -159,5 +164,6 @@ export default {
 }
 
 .content-card {
-    margin-top: 2rem;
-}</style>
+    margin-top: 2.5rem;
+}
+</style>
