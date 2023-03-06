@@ -55,7 +55,7 @@ export default {
       ],
     };
   },
-  props: ["variant", "listgroup"],
+  props: ["variante", "listgroup"],
   methods: {
     activarGeneros() {
       this.$emit('activarGenerosAbuelo')
@@ -79,6 +79,8 @@ export default {
      const icono = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-microsoft theme--dark"></i>'
       titulo[0].innerHTML = (icono + 'Generos' + html)
       titulo[1].innerHTML = (icono + 'Generos' + html)
+      titulo[2].innerHTML = (icono + 'Generos' + html)
+      titulo[3].innerHTML = (icono + 'Generos' + html)
     }
   },
   mounted() {

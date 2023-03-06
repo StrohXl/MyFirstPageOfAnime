@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       cambio: false,
+      cambioResponsive: false,
       colNormal: 9,
       colActivo: 11,
       cambioResponsive: false,
@@ -30,10 +31,8 @@ export default {
     Cambiar() {
       this.cambio = true
     },
-    CambiarYCargar() {
-      this.cambio = !this.cambio
-    },
-    ComprobarRuta(){
+
+    ComprobarRuta() {
       console.log(this.$route)
     }
   },
@@ -43,7 +42,10 @@ export default {
 <template>
   <v-app>
     <v-app-bar class="pl-5 pr-5" style="top: 0; z-index: 1000;" color="dark" fixed elevation="0">
-      <v-btn value="recent" icon @click="CambiarYCargar" class="boton">
+      <v-btn value="recent" icon @click.closed="this.cambio = !this.cambio" class="boton">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
+      <v-btn value="recent" icon @click.closed="this.cambioResponsive = !this.cambioResponsive" class="botonResponsive">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
@@ -53,6 +55,7 @@ export default {
     <v-main class="mt-16 ">
       <div>
         <v-row class="row-content">
+          <NavigationResponsive :variante="cambioResponsive" />
           <NavigationDrawer :variant="cambio" />
           <v-col :class="cambio ? 'colDefaultActive' : 'colDefault'">
             <Nuxt />
@@ -92,7 +95,19 @@ export default {
   margin-left: 1rem;
 }
 
+.boton {
+  display: none;
+}
+
 @media(min-width:750px) {
+  .botonResponsive {
+    display: none;
+  }
+
+  .boton {
+    display: block;
+  }
+
   .colDefault {
     margin-top: 2rem;
     margin-left: 18rem;
@@ -109,9 +124,7 @@ export default {
   display: none !important;
 }
 
-.botonResponsive {
-  display: none;
-}
+
 
 @media (min-width:350px) and (max-width:750px) {
   .NavigationR {
