@@ -33,6 +33,11 @@ export default {
           to: "/Animes/TopAnimes/1"
         },
         {
+          icon: "mdi-youtube-tv",
+          title: "Emision",
+          to: "/Animes/seasons-now/1"
+        },
+        {
           icon: "mdi-book-open-page-variant",
           title: "Mangas",
           to: "/Mangas/page/1"
@@ -65,7 +70,6 @@ export default {
       this.genresAnime = genresAnime.data.data
     },
     async loadGenresManga() {
-
       const genresManga = await axios.get('https://api.jikan.moe/v4/genres/manga')
       this.genresManga = genresManga.data.data
     },
@@ -126,15 +130,14 @@ export default {
 
             </template>
           </v-list-group>
-          <v-list-group v-if="index == 4" v-model="value2" :key="800" :class="variant != false? 'sub-menu-none': ''" >
+          <v-list-group v-if="index == 5" v-model="value2" :key="800" :class="variant != false? 'sub-menu-none': ''" >
             <template v-for="(x, index) in genresManga">
               <v-list-item  @click="CerrarSubMenus" :key="x.mal_id" :to="`/Mangas/genres/${x.mal_id}`" router exact v-if="index < 20">
                 {{ x.name }}
               </v-list-item>
             </template>
           </v-list-group>
-
-        <div style="border-bottom: 1px solid #eee;" v-if="index == 0 || index == 3 || index == 6"></div>
+        <div :class="variant != false? 'sub-menu-none': ''" style="border-bottom: 1px solid #eee; margin-bottom: 10px;" v-if="index == 0 || index == 4 || index == 7"></div>
       </template>
       <MiniList :cartaGeneros="variant ? 'cartaGenerosActive' : 'cartaGeneros'" />
     </v-list>
@@ -142,8 +145,19 @@ export default {
 </template>
 
 <style >
+.v-list-group__header__append-icon{
+  color: #fff !important;
+}
 .sub-menu-none{
   display: none !important;
+}
+.v-list-item--active{
+  background-color: #1976d2 !important;
+  color: #fff !important;
+}
+.v-list-item--link:before{
+  background-color: #1976d2 !important;
+
 }
 .Navigation {
   display: none !important;

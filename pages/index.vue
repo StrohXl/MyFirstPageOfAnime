@@ -2,10 +2,14 @@
     <v-row class="mb-0" style="width: 100%;">
         <v-col>
             <Carousel />
-            <ListAnimeAndManga contenido="/seasons/now" title="Animes en Emision" Direccion="Anime"  cantidad="10" />
-            <ListAnimeAndManga contenido="/anime" title="Animes" Direccion="Anime" cantidad="10"/>
-            <ListAnimeAndManga contenido="/manga" title="Mangas" Direccion="Manga" cantidad="10"/>
-
+            <ListAnimeAndManga verMas="/Animes/seasons-now/1" contenido="/seasons/now" title="ANIMES EN EMISION"
+                Direccion="Anime" pagina="2" cantidad="10" />
+            <ListAnimeAndManga timeout='200' verMas="/Animes/TopAnimes/1" contenido="/top/anime" title="TOP ANIMES"
+                Direccion="Anime" pagina="1" cantidad="10" />
+            <ListAnimeAndManga timeout='1600' verMas="/Animes/page/1" contenido="/anime" title="ANIMES" Direccion="Anime"
+                cantidad="10" />
+            <ListAnimeAndManga timeout='3000' verMas="/Mangas/page/1" contenido="/manga" title="MANGAS" Direccion="Anime"
+                cantidad="10" />
         </v-col>
 
     </v-row>
@@ -31,5 +35,4 @@ export default {
 .titulo {
     height: 80px;
     height: 100px;
-}
-</style>
+}</style>

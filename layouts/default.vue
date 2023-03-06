@@ -23,6 +23,8 @@ export default {
   },
   async mounted() {
     window.addEventListener('resize', this.CheckScreen);
+    this.ComprobarRuta
+
   },
   methods: {
     Cambiar() {
@@ -30,6 +32,9 @@ export default {
     },
     CambiarYCargar() {
       this.cambio = !this.cambio
+    },
+    ComprobarRuta(){
+      console.log(this.$route)
     }
   },
 

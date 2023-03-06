@@ -1,6 +1,5 @@
 <script >
 import axios from 'axios'
-import ListAnimeAndManga from '../../components/ListAnimeAndManga.vue';
 import IdAnimeManga from '../../components/IdAnimeManga.vue'
 export default {
     components: {
@@ -32,7 +31,14 @@ export default {
 <template lang="">
 <div>
         <IdAnimeManga :anime='anime' :imagen='imagen'/>
-    <ListAnimeAndManga Direccion='Anime' tipo2='true' :contenido='`/anime/${this.$route.params.id}/recommendations`' cantidad='4' title='Animes recomendados' />
+    <ListAnimeAndManga
+     verMas='/' 
+     Direccion='Anime'
+      tipo2='true' 
+      :contenido='`/anime/${this.$route.params.id}/recommendations`' cantidad='4' 
+      title='Animes recomendados' 
+      timeout='1600'
+      />
 </div>
 </template>
 
