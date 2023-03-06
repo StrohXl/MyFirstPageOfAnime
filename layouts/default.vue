@@ -132,7 +132,7 @@ export default {
 
 
 
-@media (min-width:350px) and (max-width:750px) {
+@media (min-width:250px) and (max-width:750px) {
   .NavigationR {
     display: block !important;
   }

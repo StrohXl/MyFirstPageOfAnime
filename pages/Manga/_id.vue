@@ -62,22 +62,24 @@ export default {
         return {
             anime: {},
             imagen: '',
-     
+
         }
     },
+    methods: {
+        async LoadData() {
+            const url = await axios.get('https://api.jikan.moe/v4/manga/' + this.$route.params.id)
+            this.imgen = url.data.data.images.webp.image_url
+            this.anime = url.data.data
+        } 
+    },
+
     async mounted() {
-        const url = await axios.get('https://api.jikan.moe/v4/manga/' + this.$route.params.id)
-        this.anime = url.data.data
-        const imagen2 = await axios.get('https://api.jikan.moe/v4/manga/' + this.$route.params.id)
-        this.imagen = imagen2.data.data.images.webp.image_url
-        console.log(url)
-      
+        this.LoadData()       
     }
 }
 
 </script>
 <style >
-
 .valueLi {
     list-style: none;
 }

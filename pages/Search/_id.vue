@@ -29,7 +29,6 @@ export default {
     },
     async mounted(){
       const url = await axios.get('https://api.jikan.moe/v4/anime?q=' + this.$route.params.id + `&sfw`)
-      console.log(url.data.data)
         this.animes= url.data.data
      }
 }

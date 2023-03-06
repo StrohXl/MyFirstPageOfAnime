@@ -14,7 +14,6 @@ export default {
   methods: {
     async TopAnime() {
       const auxData = await axios.get('https://api.jikan.moe/v4/seasons/upcoming')
-      console.log(auxData.data.data)
       this.Top = auxData.data.data
     },
   },
