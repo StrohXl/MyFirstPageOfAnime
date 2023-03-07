@@ -2,8 +2,7 @@
 import Nav from '../components/Nav.vue';
 import ListNavigationDrawerResponsive from '../components/listNavigationDrawerResponsive.vue';
 import ListNavigationDrawer from '../components/listNavigationDrawer.vue';
-import Search from '../components/Search.vue';
-export default {
+import Search from '../components/Search.vue';export default {
   name: "DefaultLayout",
   data() {
     return {
@@ -99,7 +98,7 @@ export default {
         <Search class="module-search" />
       </div>
     </v-app-bar>
-    <v-main class="mt-16 ">
+    <v-main class="mt-14 ">
       <div>
         <v-row class="row-content">
           <v-navigation-drawer v-if="windowWidth == true" temporary v-model='cambioResponsive' style="overflow: auto; "
@@ -167,16 +166,6 @@ export default {
   width: 100vw;
 }
 
-.colDefaultActive {
-  margin-top: 1rem;
-  margin-left: 1rem;
-}
-
-.colDefault {
-  margin-top: 1rem;
-  margin-left: 1rem;
-}
-
 .boton {
   display: none;
 }
@@ -193,13 +182,11 @@ export default {
 
   .colDefault {
     margin-top: 0rem;
-    margin-left: 16rem;
+    margin-left: 15.4rem;
   }
 
   .colDefaultActive {
-    margin-top: 2rem;
-    padding: 1rem 1rem 0;
-    margin-left: 7rem;
+    margin-left: 5rem;
   }
 }
 

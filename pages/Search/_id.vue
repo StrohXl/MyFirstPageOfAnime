@@ -8,18 +8,12 @@ export default {
 </script>
 <template >
     <div>
-        <ListAnimeAndManga class="mt-0" :contenido="`/manga?q=${this.$route.params.id}&sfw`" title="Resultados:"
-            Direccion="Anime" cantidad="10" />
-        <ListAnimeAndManga class="mt-0" :contenido="`/anime?q=${this.$route.params.id}&sfw`" title="Resultados:"
+        <ListAnimeAndManga title="Resultados:" class="mt-0" :contenido="`/anime?q=${this.$route.params.id}&sfw`" 
             Direccion="Anime" cantidad="100" />
+        <ListAnimeAndManga class="mt-0" :contenido="`/manga?q=${this.$route.params.id}&sfw`" 
+            Direccion="Manga" cantidad="100" />
         
     </div>
 </template>
 <style >
-.tituloBusqueda {
-    text-align: center;
-    color: var(--color-negro);
-    font-size: 7rem;
-    font-family: 'Island Moments';
-}
 </style>

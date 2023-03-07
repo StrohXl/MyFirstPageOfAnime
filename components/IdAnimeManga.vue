@@ -68,6 +68,10 @@ export default {
     </div>
 </template>
 <style>
+.containerId{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
 .col-image {
     height: 100% !important;
     width: 100% !important;

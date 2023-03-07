@@ -2,7 +2,7 @@
 import axios from 'axios';
 export default {
     name: 'ListAnimeAndManga',
-    props: ['contenido', 'Direccion', 'title', 'cantidad', 'pagina', 'tipo2', 'timeout', 'verMas'],
+    props: ['contenido', 'Direccion', 'title', 'cantidad', 'pagina', 'tipo2', 'timeout'],
     data() {
         return {
             data: [],
@@ -17,13 +17,13 @@ export default {
         LoadData() {
             setTimeout(async () => {
                 const auxData = await axios.get(this.ApiUrl + this.contenido, {
-                params: {
-                    page: this.pagina
-                }
-            })
-            console.log(auxData.data.data)
-            this.data = auxData.data.data
-        }, this.timeout);
+                    params: {
+                        page: this.pagina
+                    }
+                })
+                console.log(auxData.data.data)
+                this.data = auxData.data.data
+            }, this.timeout);
 
         }
     },
@@ -33,13 +33,12 @@ export default {
     <div class="content-card">
         <h1 class="content-card-title">
             {{ title }}
-
         </h1>
         <v-row>
             <template v-for="(item, index) in data">
                 <v-col v-if="index < cantidad" class="col-card">
                     <nuxt-link style="text-decoration: none;" :to='`/${Direccion}/${item.mal_id || item.entry.mal_id}`'>
-                        <v-card class="card">
+                        <v-card class="card" elevation-19>
                             <img :alt="item.title || item.entry.title" class="card-image"
                                 :src="tipo2 ? item.entry.images.jpg.large_image_url : item.images.jpg.large_image_url" />
                             <div class="card-body">
@@ -50,15 +49,15 @@ export default {
                                     {{ item.year || '' }}
                                 </v-card-title>
                                 <v-card-title class="card-score" primary-title>
-                                    {{ item.score || '' }}
+                                  <v-icon class="mr-2 mb-1" color="orange lighten-2" >mdi-star</v-icon>  {{ item.score || '' }}
                                 </v-card-title>
                             </div>
                         </v-card>
                     </nuxt-link>
-                   <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-                     <div class="col-status">{{ item.status }}</div>
-                     <div  class="col-type">{{ item.type }}</div>
-                   </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                        <div class="col-status">{{ item.status }}</div>
+                        <div class="col-type">{{ item.type }}</div>
+                    </div>
                 </v-col>
             </template>
         </v-row>
@@ -66,46 +65,41 @@ export default {
     </div>
 </template>
 <style>
-.col-type{
-    font-size: 0.7rem;
-    height: 20px;
+.col-type {
+    font-size: 0.4rem;
+    height: 14px;
     display: flex;
     align-items: center;
     background-color: var(--color-blue);
-    padding: 0 15px;
-    border-radius: 10px;
+    padding: 0 8px;
+    border-radius: 4px;
 }
-.col-status{
-    font-size: 0.7rem;
-    height: 20px;
+
+.col-status {
+    font-size: 0.4rem;
+    height: 14px;
     display: flex;
     align-items: center;
     color: #fff;
     background-color: var(--color-negro);
-    padding: 0 15px;
-    border-radius: 10px;
+    padding: 0 8px;
+    border-radius: 4px;
 }
+
 .content-card-title {
     color: var(--color-negro);
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     border-left: 5px solid var(--color-blue);
     padding-left: 1rem;
-    margin-bottom: 2rem;
-}
-
-.ver-mas {
-    margin-top: 3rem;
-    width: 100%;
-    display: flex;
-    justify-content: end;
+    margin-bottom: 1rem;
 }
 
 .col-card {
-    margin-bottom: 2.5rem;
-    width: 50% !important;
-    height: 150px;
+    margin-bottom: .8rem;
+    max-width: 50% !important;
+    height: 200px;
     flex-basis: auto !important;
 }
 
@@ -114,39 +108,11 @@ export default {
     height: 100%;
 }
 
-@media(min-width:600px) {
-    .col-card {
-        max-width: 33% !important;
-        height: 180px;
-    }
-
-}
-
-@media(min-width:960px) {
-    .col-card {
-        max-width: 25% !important;
-        height: 200px;
-    }
-}
-
-@media(min-width:1264px) {
-    .col-card {
-        max-width: 20% !important;
-        height: 280px;
-    }
-}
-
-@media(min-width:1904px) {
-    .col-card {
-
-        height: 350px;
-    }
-}
-
 .card-score {
     position: absolute;
     bottom: 0;
     right: 0;
+    font-size: 0.8rem;
     color: #f1c914ef;
 
 }
@@ -160,6 +126,7 @@ export default {
 }
 
 .card:hover .card-body {
+    border-radius: 4px;
     opacity: 1;
     display: flex;
     flex-direction: column;
@@ -169,23 +136,119 @@ export default {
 
 .card-title {
     overflow: hidden;
-    height: 50px;
-    font-size: .9rem;
+    height: 40px;
+    font-size: .6rem;
     padding-bottom: 0;
 }
 
 .card-year {
     padding-top: 0;
-    font-size: .8rem;
+    font-size: .5rem;
 }
 
 .card-image {
+    border-radius: 4px;
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
 .content-card {
-    margin-top: 2.5rem;
+    margin-top: 3rem;
+}
+
+@media(min-width:600px) {
+    .content-card-title {
+        font-size: 1.2rem;
+    }
+    .card-title{
+        font-size: .8rem;
+    }
+    .card-year{
+        font-size: .7rem;
+    }
+    .card-score{
+        font-size: 1rem;
+    }
+    .col-status{
+        height: 20px;
+        font-size: 0.6rem;
+    }
+    .col-type{
+        height: 20px;
+        font-size: 0.6rem;
+    }
+    .col-card {
+        margin-top: .7rem;
+        max-width: 33% !important;
+        height: 210px;
+    }
+
+}
+
+@media(min-width:960px) {
+    .content-card-title {
+        font-size: 1.4rem;
+    }
+    .col-card {
+        max-width: 25% !important;
+        height: 230px;
+    }
+}
+
+@media(min-width:1264px) {
+    .content-card-title {
+        font-size: 1.2rem;
+    }
+    .card-title{
+        font-size: .9rem;
+    }
+    .card-year{
+        font-size: .8rem;
+    }
+    .card-score{
+        font-size: 1.2rem;
+    }
+    .col-status{
+        height: 22px;
+        font-size: 0.7rem;
+    }
+    .col-type{
+        height: 22px;
+        font-size: 0.7rem;
+    }
+    .col-card {
+        margin-bottom: 1rem;
+        max-width: 20% !important;
+        height: 280px;
+    }
+}
+
+@media(min-width:1904px) {
+    .content-card-title {
+        font-size: 1.7rem;
+    }
+    .card-title{
+        font-size: 1.2rem;
+    }
+    .card-year{
+        margin-top: .5rem;
+        font-size: 1.1rem;
+    }
+    .card-score{
+        font-size: 1.5rem;
+    }
+    .col-status{
+        height: 25px;
+        font-size: 0.9rem;
+    }
+    .col-type{
+        height: 25px;
+        font-size: 0.9rem;
+    }
+    .col-card {
+        margin-bottom: 1.3rem;
+        height: 350px;
+    }
 }
 </style>
