@@ -1,42 +1,43 @@
 <script>
 import axios from 'axios';
 export default {
-    name: 'Generos',
     data() {
         return {
-            genres: []
+            data: [],
+            valor: ''
         }
     },
-    props: ['variant', 'generos'],
+    props: ['genres','variant'],
     mounted() {
-        this.activarGeneros()
-     },
-    methods: {
-        async activarGeneros() {
-            const ListaDeGeneros = await axios.get("https://api.jikan.moe/v4/genres/anime");
-            this.genres = ListaDeGeneros.data.data;
-        },
+        this.LoadData(
+            
+        )
     },
 
+    methods: {
+        LoadData() {
+            setTimeout(async () => {
+                const genres = await axios.get(`https://api.jikan.moe/v4/genres/${this.genres}`)
+                this.data = genres.data.data
+            }, 2000)
+        },
+        CerrarSubMenus() {
+            this.valor = ''
+        },
+    }
 }
+
 </script>
 
-<template >
-    <v-hover v-slot="{ hover }">
-        <v-list-group :value="variant ? false : ''" @click="activarGenerosHijo">
-            <template v-slot:activator>
-                <v-tooltip right>
-                    <template v-slot:activator="{ on, attrs }" v-bind="attrs" v-on="on">
-
-                    </template>
-                    <span>Generos</span>
-                </v-tooltip>
-            </template>
-
-
-        </v-list-group>
-    </v-hover>
+<template>
+    <v-list-group  v-model="valor" :key="800" :class="variant != false ? 'sub-menu-none' : ''">
+        <template v-for="(x, index) in data">
+            <v-list-item @click="CerrarSubMenus()" :key="x.mal_id" :to="`/Mangas/genres/${x.mal_id}`" router exact
+                v-if="index < 20">
+                {{ x.name }}
+            </v-list-item>
+        </template>
+    </v-list-group>
 </template>
-<style lang="">
-    
-</style>
+
+<style></style>

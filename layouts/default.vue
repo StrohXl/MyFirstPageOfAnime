@@ -1,14 +1,15 @@
 <script>
 import Search from '../components/Search.vue';
-import NavigationDrawer from '../components/NavigationDrawer.vue';
 import Nav from '../components/Nav.vue';
-import NavigationResponsive from '../components/NavigationResponsive.vue';
+import ListNavigationDrawerResponsive from '../components/listNavigationDrawerResponsive.vue';
+import ListNavigationDrawer from '../components/listNavigationDrawer.vue';
 export default {
   name: "DefaultLayout",
   data() {
     return {
-      cambio: false,
-      cambioResponsive: false,
+      drawer: false,
+      model: '',
+      cambioResponsive: null,
       ejecutarNavigation: false,
       colNormal: 9,
       colActivo: 11,
@@ -19,19 +20,18 @@ export default {
   },
   components: {
     Nav,
-    NavigationDrawer,
-    NavigationResponsive,
-    Search
-  },
-  async mounted() {
-    window.addEventListener('resize', this.CheckScreen);
-    this.ComprobarRuta
+    Search,
+    ListNavigationDrawer,
+    ListNavigationDrawerResponsive,
 
+},
+  async mounted() {
+    this.ComprobarDom()
   },
   methods: {
     Cambiar() {
       this.ejecutarNavigation = false
-      this.cambio = !this.cambio
+      this.drawer = !this.drawer
     },
     CambiarResponsive() {
       this.ejecutarNavigation = true
@@ -40,6 +40,11 @@ export default {
 
     ComprobarRuta() {
       console.log(this.$route)
+    },
+    ComprobarDom(){
+      window.addEventListener('resize', this.CheckScreen);
+      const windo = this.CheckScreen
+      console.log(window)
     }
   },
 
@@ -61,9 +66,15 @@ export default {
     <v-main class="mt-16 ">
       <div>
         <v-row class="row-content">
-          <NavigationResponsive v-if="ejecutarNavigation == true" :variante="cambioResponsive" />
-          <NavigationDrawer v-if="ejecutarNavigation == false" :variant="cambio" />
-          <v-col :class="cambio ? 'colDefaultActive' : 'colDefault'">
+          <v-navigation-drawer v-if="ejecutarNavigation == true" temporary v-model='cambioResponsive'
+            style="overflow: auto; " width="250px" fixed color="#272727" class="NavigationR" left>
+            <ListNavigationDrawerResponsive />
+          </v-navigation-drawer>
+          <v-navigation-drawer v-if="ejecutarNavigation == false" v-model='model' mini-variant-width="80" :mini-variant="drawer" color="#272727" fixed
+            class="Navigation" permanent width="250px">
+            <ListNavigationDrawer :variant="drawer"/>
+          </v-navigation-drawer>
+          <v-col :class="drawer ? 'colDefaultActive' : 'colDefault'">
             <Nuxt />
           </v-col>
         </v-row>
@@ -73,6 +84,12 @@ export default {
   </v-app>
 </template>
 <style>
+@media(min-width:750) {
+  .NavigationR {
+    display: none !important;
+  }
+}
+
 :root {
   --color-blue: #1976d2;
   --color-negro: #272727;
@@ -167,4 +184,5 @@ export default {
   .colResponsive {
     display: none;
   }
-}</style>
+}
+</style>
