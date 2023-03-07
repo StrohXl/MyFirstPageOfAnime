@@ -58,7 +58,7 @@ export default {
             </template>
         </v-row>
         <nuxtLink v-if="this.$route.params.id != '/'" :to="verMas" class="ver-mas">
-            <v-btn color="primary">Ver mas</v-btn>
+            <v-btn color="primary"><v-icon>mdi-chevron-triple-right</v-icon></v-btn>
         </nuxtLink>
     </div>
 </template>
