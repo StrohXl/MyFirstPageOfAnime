@@ -133,9 +133,7 @@ export default {
   background-color: #1976d2 !important;
 
 }
-.Navigation {
-  display: none !important;
-}
+
 .v-list-group__header__append-icon{
   display: flex;
   gap: 1rem;
@@ -145,7 +143,6 @@ export default {
 }
 @media (min-width:751px) {
   .Navigation {
-    display: block !important;
     overflow: hidden;
     transition: none;
   }
