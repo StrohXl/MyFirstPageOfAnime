@@ -1,5 +1,5 @@
 <template>
-    <v-row class="mb-0" style="width: 100%;">
+    <v-row class="mb-0" style="width: 100%; margin: 0px;">
         <v-col>
             <Carousel />
             <ListAnimeAndManga verMas="/Animes/seasons-now/1" contenido="/seasons/now" title="ANIMES EN EMISION"

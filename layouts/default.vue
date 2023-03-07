@@ -119,6 +119,9 @@ export default {
 .module-search{
   display: flex !important;
 }
+.row{
+  margin: 0 !important ;
+}
 .row-content {
   background-color: #efefef;
 }
