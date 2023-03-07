@@ -110,8 +110,8 @@ export default {
             </v-list-item-content>
           </v-list-item>
         </template>
-          <Generos  genres='manga' v-if="index == 1" v-model="value" :variant='variant' />
-          <Generos  genres='anime' v-if="index == 5" v-model="value2" :variant='variant' />
+          <Generos  genres='manga' v-if="index == 1" v-model="value" direccion='Animes' :variant='variant' />
+          <Generos  genres='anime' v-if="index == 5" v-model="value2" direccion='Mangas' :variant='variant' />
         <div :class="variant != false? 'sub-menu-none': ''" style="border-bottom: 1px solid #eee; margin-bottom: 10px;" v-if="index == 0 || index == 4 || index == 7"></div>
       </template>
       <MiniList :cartaGeneros="variant ? 'cartaGenerosActive' : 'cartaGeneros'" />
@@ -155,4 +155,5 @@ export default {
     background-color: #00000000 !important;
   }
 }
+
 </style>

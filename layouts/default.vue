@@ -105,8 +105,8 @@ import Search from '../components/Search.vue';export default {
             width="250px" fixed color="#272727" class="NavigationR" left>
             <ListNavigationDrawerResponsive />
           </v-navigation-drawer>
-          <v-navigation-drawer v-if="windowWidth == false" v-model='model' mini-variant-width="80" :mini-variant="drawer"
-            color="#272727" fixed class="Navigation" permanent width="250px">
+          <v-navigation-drawer width="250px" v-if="windowWidth == false" v-model='model' mini-variant-width="80" :mini-variant="drawer"
+            color="#272727" fixed class="Navigation" permanent >
             <ListNavigationDrawer :variant="drawer" />
           </v-navigation-drawer>
           <v-col :class="drawer ? 'colDefaultActive' : 'colDefault'">

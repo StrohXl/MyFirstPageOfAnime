@@ -24,7 +24,7 @@ export default {
 </script>
 <template lang="">
 
-        <v-form style="height: 60px; width: 100%;" class="formulario" v-on:submit.prevent="sendMessage">
+        <v-form style="height: 60px; width: 80%;" class="formulario" v-on:submit.prevent="sendMessage">
             <v-text-field class="mt-2 formulario-text" color="white" dense rounded v-model="message" 
               single-line outlined clear-icon="mdi-close-circle" clearable placeholder="Buscar" type="text"
               @click:append="toggleMarker" @click:append-outer="sendMessage" @click:clear="clearMessage">

@@ -6,8 +6,8 @@ export default {
     return {
       data: [],
       aleatorio: [],
-      cantidad: 15,
-      pagina: 1
+      pagina: 1,
+      pagination: 10
 
     }
   },
@@ -20,6 +20,7 @@ export default {
         }
       })
       this.data = auxData.data.data
+      this.pagination = auxData.data.pagination.last_visible_page
     },
   },
   mounted() {
@@ -41,8 +42,8 @@ export default {
           </h1>
           <v-row>
               <template v-for="(item, index) in data">
-                  <v-col v-if="index < cantidad" class="col-card">
-                      <nuxt-link style="text-decoration: none;" :to='`/${Direccion}/${item.mal_id || item.entry.mal_id}`'>
+                  <v-col class="col-card">
+                      <nuxt-link style="text-decoration: none;" :to='`/Anime/${item.mal_id}`'>
                           <v-card class="card" elevation-19>
                               <img :alt="item.title || item.entry.title" class="card-image"
                                   :src="item.images.jpg.large_image_url" />
@@ -76,7 +77,7 @@ export default {
                     v-model="pagina"
                     class="my-4"
                     total-visible="10"
-                    :length="50"
+                    :length="pagination"
                   ></v-pagination>
             </v-container>
         </v-row>
