@@ -29,35 +29,50 @@ export default {
     this.ComprobarDom()
   },
   methods: {
+    async ComprobarRuta() {
+      console.log(this.$route)
+      const ruta = this.$route
+      ruta.fullPath != '/'? 
+      console.log('la ruta ha cambiado'):
+      console.log('la ruta sigue igual')
+
+    },
     async ComprobarDom() {
-      window.addEventListener('scroll', this.Scroll)
       window.addEventListener('resize', this.CheckScreen);
       this.CheckScreen()
-      this.Scroll()
+
     },
-    Scroll(){
+    Scroll() {
       const header = document.querySelector('.header')
       const bars = window.scrollY
-      if(this.scroll >= bars){
+      if (this.scroll >= bars) {
         header.style.top = "0"
 
       }
-      else{
+      else {
         header.style.top = "-80px"
       }
       this.scroll = bars
     },
     async CheckScreen() {
-
       const width = window.innerWidth
-      if(width < 750){
+      if (width < 750) {
+        window.addEventListener('scroll', this.Scroll)
+        this.Scroll()
         this.windowWidth = true
       }
-      else{
+      else {
+        window.addEventListener('resize', () => {
+          const width = window.innerWidth
+          if (width > 750) {
+            window.removeEventListener('scroll', this.Scroll)
+          }
+        })
         this.windowWidth = false
         this.search = false
       }
     },
+
   },
 
 
@@ -77,11 +92,11 @@ export default {
       <v-btn text @click.stop="search = true" color="#272727" class="btn-search" light>
         <v-icon class="text-h5 white--text">mdi-magnify</v-icon>
       </v-btn>
-      <div :class="search? 'content-search-show':'content-search-hidden'">
-        <v-btn text @click.stop="search = false" color="#272727"  light>
+      <div :class="search ? 'content-search-show' : 'content-search-hidden'">
+        <v-btn text @click.stop="search = false" color="#272727" light>
           <v-icon class="text-h5 white--text">mdi-close</v-icon>
         </v-btn>
-        <Search class="module-search"/>
+        <Search class="module-search" />
       </div>
     </v-app-bar>
     <v-main class="mt-16 ">
@@ -112,24 +127,29 @@ export default {
   --color-gris: rgb(80, 80, 80);
   --color-blanco-transparente: rgba(255, 255, 255, 0.774);
 }
-.header{
+
+.header {
   transition-property: top;
   transition-duration: .5s;
 }
-.module-search{
+
+.module-search {
   display: flex !important;
 }
-.row{
-  margin: 0 !important ;
+.v-application--wrap{
+  background-color: #efefef;
 }
 .row-content {
   background-color: #efefef;
+  margin: 0 !important;
+
 }
 
 .content-search-hidden {
   display: none;
 }
-.content-search-show{
+
+.content-search-show {
   justify-content: center;
   height: 56px;
   background-color: var(--color-negro);
@@ -172,8 +192,8 @@ export default {
   }
 
   .colDefault {
-    margin-top: 2rem;
-    margin-left: 18rem;
+    margin-top: 0rem;
+    margin-left: 16rem;
   }
 
   .colDefaultActive {
@@ -214,5 +234,4 @@ export default {
   .colResponsive {
     display: none;
   }
-}
-</style>
+}</style>

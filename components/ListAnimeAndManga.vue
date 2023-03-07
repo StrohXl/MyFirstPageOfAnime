@@ -21,6 +21,7 @@ export default {
                     page: this.pagina
                 }
             })
+            console.log(auxData.data.data)
             this.data = auxData.data.data
         }, this.timeout);
 
@@ -54,16 +55,36 @@ export default {
                             </div>
                         </v-card>
                     </nuxt-link>
+                   <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                     <div class="col-status">{{ item.status }}</div>
+                     <div  class="col-type">{{ item.type }}</div>
+                   </div>
                 </v-col>
             </template>
         </v-row>
-        <nuxtLink v-if="this.$route.params.id != '/'" :to="verMas" class="ver-mas">
-            <v-btn color="primary"><v-icon>mdi-chevron-triple-right</v-icon></v-btn>
-        </nuxtLink>
+
     </div>
 </template>
 <style>
-
+.col-type{
+    font-size: 0.7rem;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-blue);
+    padding: 0 15px;
+    border-radius: 10px;
+}
+.col-status{
+    font-size: 0.7rem;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background-color: var(--color-negro);
+    padding: 0 15px;
+    border-radius: 10px;
+}
 .content-card-title {
     color: var(--color-negro);
     display: flex;
@@ -75,13 +96,14 @@ export default {
 }
 
 .ver-mas {
-    margin-top: 1rem;
+    margin-top: 3rem;
     width: 100%;
     display: flex;
     justify-content: end;
 }
 
 .col-card {
+    margin-bottom: 2.5rem;
     width: 50% !important;
     height: 150px;
     flex-basis: auto !important;
@@ -110,7 +132,7 @@ export default {
 @media(min-width:1264px) {
     .col-card {
         max-width: 20% !important;
-
+        height: 280px;
     }
 }
 
