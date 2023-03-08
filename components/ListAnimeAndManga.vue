@@ -40,7 +40,7 @@ export default {
                     <nuxt-link style="text-decoration: none;" :to='`/${Direccion}/${item.mal_id || item.entry.mal_id}`'>
                         <v-card class="card" elevation-19>
                             <img :alt="item.title || item.entry.title" class="card-image"
-                                :src="tipo2 ? item.entry.images.jpg.large_image_url : item.images.jpg.large_image_url" />
+                                :src="tipo2 ? item.entry.images.webp.large_image_url : item.images.webp.large_image_url" />
                             <div class="card-body">
                                 <v-card-title class="card-title" primary-title>
                                     {{ item.title || item.entry.title }}

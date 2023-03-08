@@ -109,8 +109,8 @@ export default {
 
         <v-list-group v-if="index == 1" v-model="value" :key="item.title">
           <template v-for="(x, index) in genresAnime">
-            <v-list-item @click="CerrarSubMenus" :to="`/Animes/genres/${x.mal_id}`" router exact :key="x.mal_id"
-              v-if="index < 20">
+            <v-list-item class='ml-12' @click="CerrarSubMenus" :to="`/Animes/genres/${x.mal_id}`" router exact :key="x.mal_id"
+              v-if="index < 50">
               {{ x.name }}
             </v-list-item>
 
@@ -118,8 +118,8 @@ export default {
         </v-list-group>
         <v-list-group v-if="index == 5" v-model="value2" :key="800">
           <template v-for="(x, index) in genresManga">
-            <v-list-item @click="CerrarSubMenus" :key="x.mal_id" :to="`/Mangas/genres/${x.mal_id}`" router exact
-              v-if="index < 20">
+            <v-list-item @click="CerrarSubMenus" class='ml-12' :key="x.mal_id" :to="`/Mangas/genres/${x.mal_id}`" router exact
+              v-if="index < 50">
               {{ x.name }}
             </v-list-item>
           </template>

@@ -102,7 +102,7 @@ import Search from '../components/Search.vue';export default {
       <div>
         <v-row class="row-content">
           <v-navigation-drawer v-if="windowWidth == true" temporary v-model='cambioResponsive' style="overflow: auto; "
-            width="250px" fixed color="#272727" class="NavigationR" left>
+            width="280px" fixed color="#272727" class="NavigationR" left>
             <ListNavigationDrawerResponsive />
           </v-navigation-drawer>
           <v-navigation-drawer width="250px" v-if="windowWidth == false" v-model='model' mini-variant-width="80" :mini-variant="drawer"
