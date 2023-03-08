@@ -134,7 +134,7 @@ export default {
 .card-title {
     overflow: hidden;
     height: 40px;
-    font-size: .6rem;
+    font-size: .6rem !important;
     padding-bottom: 0;
 }
 

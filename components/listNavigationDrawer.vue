@@ -3,77 +3,79 @@ import MiniList from './MiniList.vue'
 import Generos from './Generos.vue'
 import axios from 'axios'
 export default {
-    data() {
-        return {
-            value: '',
-            value2: '',
-            epale: true,
-            items: [
-                {
-                    icon: "mdi-home",
-                    title: "Inicio",
-                    to: "/"
-                },
-                {
-                    icon: "mdi-step-forward",
-                    title: "Animes",
-                    to: "/Animes/page/1"
-                },
-                {
-                    icon: "mdi-microsoft",
-                    title: "Generos",
-                    to: "/Animes/genres/1"
-                },
-                {
-                    icon: "mdi-star-settings-outline",
-                    title: "Top Animes",
-                    to: "/Animes/TopAnimes/1"
-                },
-                {
-                    icon: "mdi-youtube-tv",
-                    title: "Emision",
-                    to: "/Animes/seasons-now/1"
-                },
-                {
-                    icon: "mdi-book-open-page-variant",
-                    title: "Mangas",
-                    to: "/Mangas/page/1"
-                },
-                {
-                    icon: "mdi-microsoft",
-                    title: "Generos",
-                    to: "/Mangas/genres/1"
-                },
-                {
-                    icon: "mdi-star-settings-outline",
-                    title: "Top Mangas",
-                    to: "/Mangas/TopMangas/1"
-                },
-            ],
-        }
-    },
-    props:['variant'],
-    mounted() {
-        this.cargarTitulo()
-    },
-    components:{
-      MiniList,
-      Generos
-    },
-    methods: {
-
-        CerrarSubMenus() {
-            this.value = ''
-            this.value2 = ''
+  data() {
+    return {
+      value: '',
+      value2: '',
+      epale: true,
+      items: [
+        {
+          icon: "mdi-home",
+          title: "Inicio",
+          to: "/"
         },
-        cargarTitulo() {
-            const titulo = document.querySelectorAll('.v-list-group__header__append-icon')
-            const html = titulo[0].innerHTML
-            const icono = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-microsoft theme--dark"></i>'
-            titulo[0].innerHTML = (icono + 'Generos' + html)
-            titulo[1].innerHTML = (icono + 'Generos' + html)
-        }
+        {
+          icon: "mdi-step-forward",
+          title: "Animes",
+          to: "/Animes/page/1"
+        },
+        {
+          icon: "mdi-microsoft",
+          title: "Generos",
+          to: "/Animes/genres/1"
+        },
+        {
+          icon: "mdi-star-settings-outline",
+          title: "Top Animes",
+          to: "/Animes/TopAnimes/1"
+        },
+        {
+          icon: "mdi-youtube-tv",
+          title: "Emision",
+          to: "/Animes/seasons-now/1"
+        },
+        {
+          icon: "mdi-book-open-page-variant",
+          title: "Mangas",
+          to: "/Mangas/page/1"
+        },
+        {
+          icon: "mdi-microsoft",
+          title: "Generos",
+          to: "/Mangas/genres/1"
+        },
+        {
+          icon: "mdi-star-settings-outline",
+          title: "Top Mangas",
+          to: "/Mangas/TopMangas/1"
+        },
+      ],
     }
+  },
+  props: ['variant'],
+  mounted() {
+    this.cargarTitulo()
+  },
+  components: {
+    MiniList,
+    Generos
+  },
+  methods: {
+
+    CerrarSubMenus() {
+      this.value = ''
+      this.value2 = ''
+      const navigationDrawer = document.querySelector('.Navigation')
+      navigationDrawer.scroll(0, 0)
+    },
+    cargarTitulo() {
+      const titulo = document.querySelectorAll('.v-list-group__header__append-icon')
+      const html = titulo[0].innerHTML
+      const icono = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-microsoft theme--dark"></i>'
+      titulo[0].innerHTML = (icono + 'Generos' + html)
+      titulo[1].innerHTML = (icono + 'Generos' + html)
+    }
+  }
 
 
 }
@@ -119,28 +121,33 @@ export default {
 </template>
 
 <style >
-.v-list-group__header__append-icon{
+.v-list-group__header__append-icon {
   color: #fff !important;
 }
-.sub-menu-none{
+
+.sub-menu-none {
   display: none !important;
 }
-.v-list-item--active{
+
+.v-list-item--active {
   background-color: #1976d2 !important;
   color: #fff !important;
 }
-.v-list-item--link:before{
+
+.v-list-item--link:before {
   background-color: #1976d2 !important;
 
 }
 
-.v-list-group__header__append-icon{
+.v-list-group__header__append-icon {
   display: flex;
   gap: 1rem;
 }
-.mdi-chevron-down{
+
+.mdi-chevron-down {
   margin-left: 3rem;
 }
+
 @media (min-width:751px) {
   .Navigation {
     overflow: hidden;
@@ -154,6 +161,4 @@ export default {
   .v-navigation-drawer__border {
     background-color: #00000000 !important;
   }
-}
-
-</style>
+}</style>

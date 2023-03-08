@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     async LoadData() {
+      this.loading = true
       window.scroll(0, 0)
       const auxData = await axios.get('https://api.jikan.moe/v4/top/anime', {
         params: {

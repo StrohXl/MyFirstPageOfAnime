@@ -7,10 +7,10 @@ export default {
             valor: ''
         }
     },
-    props: ['genres','variant','direccion', 'time'],
+    props: ['genres', 'variant', 'direccion', 'time'],
     mounted() {
         this.LoadData(
-            
+
         )
     },
 
@@ -22,6 +22,8 @@ export default {
             }, this.time)
         },
         CerrarSubMenus() {
+            const navigationDrawer = document.querySelector('.Navigation')
+            navigationDrawer.scroll(0, 0)
             this.valor = ''
         },
     }
@@ -30,10 +32,10 @@ export default {
 </script>
 
 <template>
-    <v-list-group  v-model="valor" :key="800" :class="variant != false ? 'sub-menu-none' : ''">
+    <v-list-group v-model="valor" :key="800" :class="variant != false ? 'sub-menu-none' : ''">
         <template v-for="(x, index) in data">
-            <v-list-item class="ml-12" @click="CerrarSubMenus()" :key="x.mal_id" :to="`/${direccion}/genres/${x.mal_id}`" router exact
-                v-if="index < 50">
+            <v-list-item class="ml-12" @click="CerrarSubMenus()" :key="x.mal_id" :to="`/${direccion}/genres/${x.mal_id}`"
+                router exact v-if="index < 50">
                 {{ x.name }}
             </v-list-item>
         </template>

@@ -2,7 +2,7 @@
 import Nav from '../components/Nav.vue';
 import ListNavigationDrawerResponsive from '../components/listNavigationDrawerResponsive.vue';
 import ListNavigationDrawer from '../components/listNavigationDrawer.vue';
-import Search from '../components/Search.vue';export default {
+import Search from '../components/Search.vue'; export default {
   name: "DefaultLayout",
   data() {
     return {
@@ -31,15 +31,25 @@ import Search from '../components/Search.vue';export default {
     async ComprobarRuta() {
       console.log(this.$route)
       const ruta = this.$route
-      ruta.fullPath != '/'? 
-      console.log('la ruta ha cambiado'):
-      console.log('la ruta sigue igual')
+      ruta.fullPath != '/' ?
+        console.log('la ruta ha cambiado') :
+        console.log('la ruta sigue igual')
 
     },
     async ComprobarDom() {
       window.addEventListener('resize', this.CheckScreen);
       this.CheckScreen()
 
+    },
+    openMenu(){
+      this.drawer = !this.drawer
+      const navigationDrawer =  document.querySelector('.Navigation')
+      navigationDrawer.scroll(0, 0)
+    },
+    openMenu2(){
+      this.cambioResponsive = !this.cambioResponsive
+      const navigationDrawer =  document.querySelector('.NavigationR')
+      navigationDrawer.scroll(0, 0)
     },
     Scroll() {
       const header = document.querySelector('.header')
@@ -80,10 +90,10 @@ import Search from '../components/Search.vue';export default {
 <template>
   <v-app>
     <v-app-bar class="header" style=" z-index: 1000;" color="dark" fixed elevation="0">
-      <v-btn value="recent" icon @click.stop="drawer = !drawer" class="boton">
+      <v-btn value="recent" icon @click="openMenu()" class="boton">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-      <v-btn value="recent" icon @click.stop="cambioResponsive = !cambioResponsive" class="botonResponsive">
+      <v-btn value="recent" icon @click="openMenu2()" class="botonResponsive">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
 
@@ -92,7 +102,8 @@ import Search from '../components/Search.vue';export default {
         <v-icon class="text-h5 white--text">mdi-magnify</v-icon>
       </v-btn>
       <div :class="search ? 'content-search-show' : 'content-search-hidden'">
-        <v-btn style="width: 40px; font-size: .2rem; min-width: 0;" text @click.stop="search = false" color="#272727" light>
+        <v-btn style="width: 40px; font-size: .2rem; min-width: 0;" text @click.stop="search = false" color="#272727"
+          light>
           <v-icon class="text-h5 white--text">mdi-close</v-icon>
         </v-btn>
         <Search class="module-search" />
@@ -105,8 +116,8 @@ import Search from '../components/Search.vue';export default {
             width="280px" fixed color="#272727" class="NavigationR" left>
             <ListNavigationDrawerResponsive />
           </v-navigation-drawer>
-          <v-navigation-drawer width="250px" v-if="windowWidth == false" v-model='model' mini-variant-width="80" :mini-variant="drawer"
-            color="#272727" fixed class="Navigation" permanent >
+          <v-navigation-drawer width="250px" v-if="windowWidth == false" v-model='model' mini-variant-width="80"
+            :mini-variant="drawer" color="#272727" fixed class="Navigation" permanent>
             <ListNavigationDrawer :variant="drawer" />
           </v-navigation-drawer>
           <v-col :class="drawer ? 'colDefaultActive' : 'colDefault'">
@@ -135,9 +146,11 @@ import Search from '../components/Search.vue';export default {
 .module-search {
   display: flex !important;
 }
-.v-application--wrap{
+
+.v-application--wrap {
   background-color: #efefef;
 }
+
 .row-content {
   background-color: #efefef;
   margin: 0 !important;
@@ -172,9 +185,10 @@ import Search from '../components/Search.vue';export default {
 
 
 @media(min-width:750px) {
-  .header{
+  .header {
     padding-left: .8rem !important;
   }
+
   .botonResponsive {
     display: none;
   }
