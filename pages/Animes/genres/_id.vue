@@ -5,14 +5,16 @@ export default {
   data() {
     return {
       data: [],
-      aleatorio: [],
+      loading: true,
+      load: '',
       pagina: 1,
-      pagination: 10
-
+      pagination: 10,
+      genre: ''
     }
   },
   methods: {
     async LoadData() {
+      this.loading = true
       window.scroll(0, 0)
       const auxData = await axios.get('https://api.jikan.moe/v4/anime', {
         params: {
@@ -22,10 +24,19 @@ export default {
       })
       this.data = auxData.data.data
       this.pagination = auxData.data.pagination.last_visible_page
+      this.loading = false
+      this.data.length == 0 ? this.load = true : this.load = false
+    },
+    async LoadGenre() {
+      const auxData = await axios.get('https://api.jikan.moe/v4/genres/anime')
+      this.data = auxData.data.data
+      const filtrado = auxData.data.data.filter((i)=> i.mal_id == this.$route.params.id)
+      this.genre = filtrado[0].name
     },
   },
   mounted() {
     this.LoadData()
+    this.LoadGenre()
   },
   watch: {
     pagina: function () {
@@ -37,39 +48,7 @@ export default {
 
 <template lang="">
   <div>
-       <div class="content-card content-card-pages">
-          <h1 class="content-card-title">
-              ANIMES  
-          </h1>
-          <v-row>
-              <template v-for="(item, index) in data">
-                  <v-col class="col-card">
-                      <nuxt-link style="text-decoration: none;" :to='`/Anime/${item.mal_id}`'>
-                          <v-card class="card" elevation-19>
-                              <img :alt="item.title || item.entry.title" class="card-image"
-                                  :src="item.images.jpg.large_image_url" />
-                              <div class="card-body">
-                                  <v-card-title class="card-title" primary-title>
-                                      {{ item.title || item.entry.title }}
-                                  </v-card-title>
-                                  <v-card-title class="card-year" primary-title>
-                                      {{ item.year || '' }}
-                                  </v-card-title>
-                                  <v-card-title class="card-score" primary-title>
-                                      {{ item.score || '' }}
-                                  </v-card-title>
-                              </div>
-                          </v-card>
-                      </nuxt-link>
-                     <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-                       <div class="col-status">{{ item.status }}</div>
-                       <div  class="col-type">{{ item.type }}</div>
-                     </div>
-                  </v-col>
-              </template>
-          </v-row>
-        
-      </div>
+     <ListAnimeAndManga class='content-card-pages' :title='`Animes de ${genre}`' :loading="loading" :load="load" :data="data" Direccion="Anime" :cantidad="25" />
       <div class="text-center">
       <v-container>
         <v-row justify="center">
@@ -87,5 +66,13 @@ export default {
   </div>
 </template>
 <style>
+.content-card-pages {
+  margin-top: 1.5rem;
+}
 
-</style>
+@media(min-width: 750px) {
+  .content-card-pages {
+    margin-left: 1.5rem;
+    margin-right: 1rem;
+  }
+}</style>

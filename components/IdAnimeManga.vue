@@ -1,43 +1,50 @@
 <script>
 import axios from 'axios'
+import LoadingDetails from './Loading-details.vue'
+import Loading from './Loading.vue'
 export default {
-    name: 'IdAnimeManga',
+    name: "IdAnimeManga",
     data() {
         return {
             anime: [],
-            imagen: '',
-            imagenBack: '',
-            id: ''
-        }
+            imagen: "",
+            imagenBack: "",
+            id: "",
+            loading: true,
+        };
     },
-    props: ['direccion', 'Genres'],
+    props: ["direccion", "Genres"],
     methods: {
         async LoadData() {
-            const anime = await axios.get(`https://api.jikan.moe/v4/${this.direccion}/` + this.$route.params.id)
-            this.anime = anime.data.data
-            console.log(anime.data.data)
-            this.id = this.$route.params.id
-            this.imagen = anime.data.data.images.jpg.large_image_url
-            this.imagenBack = anime.data.data.images.jpg.large_image_url
+            this.loading = true;
+            const anime = await axios.get(`https://api.jikan.moe/v4/${this.direccion}/` + this.$route.params.id);
+            this.anime = anime.data.data;
+            console.log(anime.data.data);
+            this.id = this.$route.params.id;
+            this.imagen = anime.data.data.images.jpg.large_image_url;
+            this.imagenBack = anime.data.data.images.jpg.large_image_url;
+            this.loading = false;
         }
     },
     mounted() {
-        this.LoadData()
+        this.LoadData();
     },
-
+    components: { LoadingDetails, Loading }
 }
 </script>
 <template>
     <div class="black--text containerId ">
         <div style="width: 100%; display: flex; flex-wrap: wrap; position: relative; z-index: 0;">
             <div class="col-content-image">
-                <img :src='imagen' class="col-image" />
+                <Loading class="col-image" v-if="loading" />
+                <img :src='imagen' class="col-image" v-if="loading == false" />
             </div>
             <div class="content-back-image">
                 <img class="content-image" :src="imagen" />
                 <div class="background"></div>
             </div>
-            <div class="col-content-description">
+            <LoadingDetails class="col-content-description col-content-description-loading" v-if="loading" />
+            <div v-if="loading == false" class="col-content-description">
                 <v-card-title class="col-title">
                     {{ anime.title }}
                 </v-card-title>
@@ -79,6 +86,12 @@ export default {
     </div>
 </template>
 <style>
+.col-content-description-loading{
+    margin-bottom: 5rem !important;
+}
+.col-content-description-loading .v-skeleton-loader__article{
+    height: 80% !important;
+}
 .content-back-image {
     top: -1rem;
     left: -0.75rem;
@@ -199,12 +212,15 @@ export default {
         margin-top: 1rem;
         font-size: 1.8rem;
     }
-    .col-score{
-        font-size: 1.5rem ;
+
+    .col-score {
+        font-size: 1.5rem;
     }
-    .col-status{
+
+    .col-status {
         font-weight: 300;
     }
+
     .col-content-image {
         margin-bottom: 3rem;
         height: 380px;
@@ -215,6 +231,7 @@ export default {
         width: 70%;
         padding: 0 1rem 0;
     }
+
     .col-synopsis {
         font-size: 1rem;
 
@@ -228,9 +245,11 @@ export default {
         margin-top: 2rem;
         font-size: 3rem;
     }
-    .info1 span{
+
+    .info1 span {
         font-size: 1rem !important;
     }
+
     .col-content-image {
         height: 500px;
         width: 25%;
@@ -245,4 +264,5 @@ export default {
         width: 70%;
         padding: 0 1rem 0 !important;
     }
-}</style>
+}
+</style>

@@ -7,7 +7,7 @@ export default {
             valor: ''
         }
     },
-    props: ['genres','variant','direccion'],
+    props: ['genres','variant','direccion', 'time'],
     mounted() {
         this.LoadData(
             
@@ -19,7 +19,7 @@ export default {
             setTimeout(async () => {
                 const genres = await axios.get(`https://api.jikan.moe/v4/genres/${this.genres}`)
                 this.data = genres.data.data
-            }, 2000)
+            }, this.time)
         },
         CerrarSubMenus() {
             this.valor = ''

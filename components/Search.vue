@@ -73,7 +73,7 @@ export default {
   }
 }
 
-@media(min-width:500px) {
+@media(min-width:550px) {
   .formulario {
     width: 300px !important;
   }

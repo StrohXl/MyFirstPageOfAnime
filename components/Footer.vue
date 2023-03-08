@@ -35,10 +35,10 @@ export default {
     data: () => ({
       links: [
         { name: "Inicio", to: "/"},
-        { name: "Animes", to: "/Animes"},
+        { name: "Animes", to: "/Animes/page/1"},
         { name: "TopAnimes", to: "/Animes/TopAnimes/1"},
         { name: "Emision", to: "/Animes/seasons-now/1"},
-        { name: "Mangas", to: "/Mangas"},
+        { name: "Mangas", to: "/Mangas/page/1"},
         { name: "TopMangas", to: "/Mangas/TopMangas/1"},
       ],
     }),

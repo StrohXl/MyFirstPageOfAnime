@@ -48,7 +48,7 @@ export default {
                 {
                     icon: "mdi-star-settings-outline",
                     title: "Top Mangas",
-                    to: "/TopMangas"
+                    to: "/Mangas/TopMangas/1"
                 },
             ],
         }

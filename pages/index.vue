@@ -1,29 +1,77 @@
+<script >
+import ListAnimeAndManga from '../components/ListAnimeAndManga.vue';
+import Carousel from '../components/Carousel.vue';
+import axios from 'axios';
+export default {
+    name: "IndexPage",
+    data() {
+        return {
+            ApiUrl: 'https://api.jikan.moe/v4',
+            data: [],
+            loading: true,
+            load: '',
+            data2: [],
+            loading2: true,
+            load2: '',
+            data3: [],
+            loading3: true,
+            load3: '',
+        }
+    },
+    components: { ListAnimeAndManga, Carousel },
+    mounted() {
+        this.LoadData()
+        this.LoadData2()
+        this.LoadData3()
+
+    },
+    methods: {
+        async LoadData() {
+            setTimeout(async () => {
+                const auxData = await axios.get(this.ApiUrl + '/seasons/now',{
+                    params:{
+                        page: 2
+                    }
+                })
+                this.data = auxData.data.data
+                this.loading = false
+                this.data.length == 0 ? this.load = true : this.load = false
+            }, 1500);
+
+        },
+        async LoadData2() {
+            setTimeout(async () => {
+                const auxData = await axios.get(this.ApiUrl + '/top/anime')
+                this.data2 = auxData.data.data
+                this.loading2 = false
+                this.data2.length == 0 ? this.load2 = true : this.load2 = false
+            }, 3000);
+
+        },
+        async LoadData3() {
+            setTimeout(async () => {
+                const auxData = await axios.get(this.ApiUrl + '/manga')
+                this.data3 = auxData.data.data
+                this.loading3 = false
+                this.data3.length == 0 ? this.load3 = true : this.load3 = false
+            }, 6000);
+
+        }
+    },
+}
+
+</script>
 <template>
     <v-row class="mb-0" style="width: 100%; margin: 0px;">
         <v-col>
             <Carousel />
-            <ListAnimeAndManga verMas="/Animes/seasons-now/1" contenido="/seasons/now" title="ANIMES EN EMISION"
-                Direccion="Anime" pagina="2" cantidad="10" />
-            <ListAnimeAndManga timeout='200' verMas="/Animes/TopAnimes/1" contenido="/top/anime" title="TOP ANIMES"
-                Direccion="Anime" pagina="1" cantidad="10" />
-            <ListAnimeAndManga timeout='1600' verMas="/Animes/page/1" contenido="/anime" title="ANIMES" Direccion="Anime"
-                cantidad="10" />
-            <ListAnimeAndManga timeout='3000' verMas="/Mangas/page/1" contenido="/manga" title="MANGAS" Direccion="Manga"
-                cantidad="10" />
+            <ListAnimeAndManga :loading="loading" :load="load" :data="data" title="ANIMES EN EMISION" Direccion="Anime" :cantidad="10" />
+            <ListAnimeAndManga :loading="loading2" :load="load2" :data="data2" title="TOP ANIMES" Direccion="Anime" :cantidad="10" />
+            <ListAnimeAndManga :loading="loading3" :load="load3" :data="data3" title="MANGAS" Direccion="Manga" :cantidad="10" />
         </v-col>
 
     </v-row>
 </template>
-<script >
-import ListAnimeAndManga from '../components/ListAnimeAndManga.vue';
-import Carousel from '../components/Carousel.vue';
-
-export default {
-    name: "IndexPage",
-    components: { ListAnimeAndManga, Carousel },
-}
-
-</script>
 <style>
 .tituloIntersectado {
     color: #000 !important;
@@ -35,4 +83,5 @@ export default {
 .titulo {
     height: 80px;
     height: 100px;
-}</style>
+}
+</style>
