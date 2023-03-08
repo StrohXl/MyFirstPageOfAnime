@@ -50,7 +50,7 @@ export default {
 
 }
 
-@media(min-width:200px) and (max-width:750px) {
+@media(min-width:200px) and (max-width:500px) {
   .buscar-responsive{
     margin-top: .2rem;
   }
@@ -73,9 +73,9 @@ export default {
   }
 }
 
-@media(min-width:700px) {
+@media(min-width:500px) {
   .formulario {
-    width: 400px !important;
+    width: 300px !important;
   }
 
   .btn-search {
@@ -86,4 +86,9 @@ export default {
   .formulario {
     display: flex;
   }
-}</style>
+}
+@media(min-width:1200px) {
+  .formulario {
+    width: 400px !important;
+  }}
+</style>
