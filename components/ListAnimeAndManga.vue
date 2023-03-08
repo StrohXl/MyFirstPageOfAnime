@@ -109,7 +109,7 @@ export default {
     position: absolute;
     bottom: 0;
     right: 0;
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
     color: #ffcb0f;
 
 }
@@ -134,13 +134,13 @@ export default {
 .card-title {
     overflow: hidden;
     height: 40px;
-    font-size: 0.6rem;
+    font-size: 0.6rem !important;
     padding-bottom: 0;
 }
 
 .card-year {
     padding-top: 0;
-    font-size: 0.5rem;
+    font-size: 0.5rem !important;
 }
 
 .card-image {
@@ -160,24 +160,24 @@ export default {
     }
 
     .content-card-title {
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
     }
 
     .card-title {
-        font-size: 0.8rem;
+        font-size: 0.8rem !important;
     }
 
     .card-year {
-        font-size: 0.7rem;
+        font-size: 0.7rem !important;
     }
 
     .card-score {
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
 
     .col-status {
         height: 20px;
-        font-size: 0.6rem;
+        font-size: 0.6rem !important;
     }
 
     .col-type {
@@ -199,7 +199,7 @@ export default {
     }
 
     .content-card-title {
-        font-size: 1.4rem;
+        font-size: 1.4rem !important;
     }
 
     .col-card {
@@ -214,29 +214,29 @@ export default {
     }
 
     .content-card-title {
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
     }
 
     .card-title {
-        font-size: 0.9rem;
+        font-size: 0.9rem !important;
     }
 
     .card-year {
-        font-size: 0.8rem;
+        font-size: 0.8rem !important;
     }
 
     .card-score {
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
     }
 
     .col-status {
         height: 22px;
-        font-size: 0.7rem;
+        font-size: 0.7rem !important;
     }
 
     .col-type {
         height: 22px;
-        font-size: 0.7rem;
+        font-size: 0.7rem !important;
     }
 
     .col-card {
@@ -248,30 +248,30 @@ export default {
 
 @media(min-width:1904px) {
     .content-card-title {
-        font-size: 1.7rem;
+        font-size: 1.7rem !important;
     }
 
     .card-title {
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
     }
 
     .card-year {
-        margin-top: .5rem;
-        font-size: 1.1rem;
+        margin-top: .5rem ;
+        font-size: 1.1rem !important;
     }
 
     .card-score {
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
     }
 
     .col-status {
         height: 25px;
-        font-size: 0.9rem;
+        font-size: 0.9rem !important;
     }
 
     .col-type {
         height: 25px;
-        font-size: 0.9rem;
+        font-size: 0.9rem !important;
     }
 
     .col-card {
