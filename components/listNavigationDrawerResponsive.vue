@@ -95,7 +95,7 @@ export default {
 </script>
 
 <template lang="">
-    <v-list style="position: fixed; width: 100% ; top:80px" nav>
+    <v-list style="position: fixed; width: 100% ; top:70px" nav>
       <template v-for="(item, index) in items">
 
         <v-list-item @click="CerrarSubMenus" :to="item.to" router exact :key="index" v-if="item.title != 'Generos'">

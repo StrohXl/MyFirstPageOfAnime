@@ -1,77 +1,129 @@
 <script>
+import axios from 'axios'
 export default {
     name: 'IdAnimeManga',
-    props: ['anime', 'imagen']
+    data() {
+        return {
+            anime: [],
+            imagen: '',
+            imagenBack: '',
+            id: ''
+        }
+    },
+    props: ['direccion', 'Genres'],
+    methods: {
+        async LoadData() {
+            const anime = await axios.get(`https://api.jikan.moe/v4/${this.direccion}/` + this.$route.params.id)
+            this.anime = anime.data.data
+            console.log(anime.data.data)
+            this.id = this.$route.params.id
+            this.imagen = anime.data.data.images.jpg.large_image_url
+            this.imagenBack = anime.data.data.images.jpg.large_image_url
+        }
+    },
+    mounted() {
+        this.LoadData()
+    },
+
 }
 </script>
 <template>
-    <div class="black--text containerId " height="600px">
-        <v-row style="width: 100%;">
+    <div class="black--text containerId ">
+        <div style="width: 100%; display: flex; flex-wrap: wrap; position: relative; z-index: 0;">
             <div class="col-content-image">
                 <img :src='imagen' class="col-image" />
+            </div>
+            <div class="content-back-image">
+                <img class="content-image" :src="imagen" />
+                <div class="background"></div>
             </div>
             <div class="col-content-description">
                 <v-card-title class="col-title">
                     {{ anime.title }}
                 </v-card-title>
-                <div>
-                    <v-card-title class="d-flex justify-center">
-                        Sinopsis
-                    </v-card-title>
+                <div class="info1 mt-2">
+                    <span>
+                        {{ anime.year }}
+                    </span>
+                    |
+                    <span class="info-genres">
+                        <template v-for="(item, index) in anime.genres">
+
+                            <nuxtLink :to="`/${Genres}/genres/${item.mal_id}`">
+                                <v-btn color="primary" small> {{ item.name }}</v-btn>
+                            </nuxtLink>
+                        </template>
+                    </span>
+                    |
+                    <div>
+                        {{ anime.type }}
+                    </div>
+
+                    |
+                    <div v-if="anime.episodes">
+                        Episodes {{ anime.episodes }}
+                    </div>
+
+                </div>
+                <div class="col-score">
+                    <v-icon class="mt-2 mb-3" style="color: #ffcb0f;">mdi-star</v-icon> {{ anime.score }}
+                </div>
+                <div class=" mt-3">
+                    {{ anime.status }}
                 </div>
                 <div class="col-synopsis">
                     {{ anime.synopsis }}
                 </div>
-                <div class="col-data-info">
-                    <div>
-                        <ul>
-                            <li class="mt-2">Year:</li>
-                            <li class="mt-2">Episodes:</li>
-                            <li class="mt-2">Genres:</li>
-                            <li class="mt-2">Status:</li>
-                            <li class="mt-2">Studios:</li>
-                            <li class="mt-2">Type:</li>
-                            <li class="mt-2">Puntuacion:</li>
-                            <li class="mt-2">Demographics:</li>
-                        </ul>
-                    </div>
-                    <div class="ml-16">
-                        <ul>
-                            <li class="valueLi mt-2">{{ anime.year }}</li>
-                            <li class="valueLi mt-2">{{ anime.episodes }}</li>
-                            <li class="valueLi mt-2 value-li-genres">
-                                <template v-for="(item, index) in anime.genres">
-                            
-                                    <v-btn color="primary" small> {{ item.name }}</v-btn>
-                            </template>
-                            </li>
-                            <li class="valueLi mt-2">{{ anime.status }}</li>
-                            <li class="valueLi mt-2"><template v-for="(item, index) in anime.studios">{{ item.name
-                            }}</template></li>
-                            <li class="valueLi mt-2">{{ anime.type }}</li>
-                            <li class="valueLi mt-2 value-li-genres">
-                                <template v-for="(item, index) in anime.demographics">
-                                    <div> {{ item.name }}</div>
-                                </template>
-                            </li>
-                            <li class="valueLi mt-2">{{ anime.score }}</li>
-
-                        </ul>
-                    </div>
-                </div>
             </div>
-
-        </v-row>
-        <v-card-title primary-title>
-            Episodios
-        </v-card-title>
+        </div>
     </div>
 </template>
 <style>
-.containerId{
-    margin-top: 1rem;
-    margin-left: 1rem;
+.content-back-image {
+    top: -1rem;
+    left: -0.75rem;
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 100%;
 }
+
+
+.info1 {
+    font-weight: 300;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.col-score {
+    margin-top: 1rem;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.info-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.content-image {
+    width: 100%;
+    height: 100%;
+
+}
+
+.background {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000000c4;
+}
+
 .col-image {
     height: 100% !important;
     width: 100% !important;
@@ -86,42 +138,46 @@ export default {
 
 .col-content-image {
     height: 400px;
-    width: 70%;
+    width: 80%;
     margin: auto;
     margin-top: 2rem;
 }
 
 .col-content-description {
+    position: relative;
+    z-index: 100;
+    color: #fff;
     width: 95%;
     margin: auto;
 }
 
 .col-synopsis {
-    text-align: justify;
-}
-
-.col-data-info {
-    display: flex;
+    padding-bottom: 5rem;
+    font-size: .8rem;
+    font-weight: 300;
     margin-top: 1rem;
-    font-size: .7rem;
+    text-align: justify;
 }
 
 .col-title {
     text-align: center;
-    display: flex;
-    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
-@media(min-width:900px) {
+@media(min-width:750px) {
     .col-title {
-        font-size: 2rem;
 
+        font-size: 1.5rem;
     }
 
     .col-content-image {
-        height: 500px;
-        width: 30%;
-        margin-top: 0.5rem;
+        height: 380px;
+        width: 35%;
+    }
+
+    .info1 {
+        align-items: center;
 
     }
 
@@ -130,13 +186,63 @@ export default {
         margin-left: 2rem;
     }
 
-    .col-synopsis {
-        margin-left: 2rem;
+    .col-content-description {
+        width: 60%;
+        padding: 0 1rem 0;
+
+    }
+}
+
+@media(min-width:1250px) {
+    .col-title {
+        padding-left: 0 !important;
+        margin-top: 1rem;
+        font-size: 1.8rem;
+    }
+    .col-score{
+        font-size: 1.5rem ;
+    }
+    .col-status{
+        font-weight: 300;
+    }
+    .col-content-image {
+        margin-bottom: 3rem;
+        height: 380px;
+        width: 25%;
     }
 
     .col-content-description {
         width: 70%;
-        margin: auto;
+        padding: 0 1rem 0;
+    }
+    .col-synopsis {
+        font-size: 1rem;
 
+    }
+}
+
+@media(min-width:1600px) {
+    .col-title {
+        padding-left: 0 !important;
+        text-align: start;
+        margin-top: 2rem;
+        font-size: 3rem;
+    }
+    .info1 span{
+        font-size: 1rem !important;
+    }
+    .col-content-image {
+        height: 500px;
+        width: 25%;
+    }
+
+    .col-synopsis {
+
+        font-size: 1.3rem;
+    }
+
+    .col-content-description {
+        width: 70%;
+        padding: 0 1rem 0 !important;
     }
 }</style>

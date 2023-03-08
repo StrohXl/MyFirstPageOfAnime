@@ -1,5 +1,4 @@
 <script >
-import axios from 'axios'
 import IdAnimeManga from '../../components/IdAnimeManga.vue'
 export default {
     components: {
@@ -13,25 +12,16 @@ export default {
             id: ''
         }
     },
-    async mounted() {
-        this.LoadData()
-    },
-    methods: {
-        async LoadData() {
-            const anime = await axios.get('https://api.jikan.moe/v4/anime/' + this.$route.params.id)
-            this.anime = anime.data.data
-            this.id = this.$route.params.id
-            this.imagen = anime.data.data.images.jpg.large_image_url
-        }
-    }
+ 
 }
 
 </script>
 
 <template lang="">
 <div>
-        <IdAnimeManga :anime='anime' :imagen='imagen'/>
+        <IdAnimeManga direccion='anime' Genres='Animes'/>
     <ListAnimeAndManga
+    class='mt-1'
      verMas='/' 
      Direccion='Anime'
       tipo2='true' 

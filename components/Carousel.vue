@@ -49,10 +49,13 @@ export default {
 }
 
 .carousel {
+  background-color: #000;
+  border-radius: 4px;
   height: 250px !important;
 }
 
 .carousel-image {
+  border-radius: 1rem;
   width: 100%;
   height: 250px 
 }
@@ -64,7 +67,7 @@ export default {
   padding-left: 1rem;
   padding-top: 1rem;
   width: 100%;
-  height: 10%;
+  height: 15%;
   overflow: hidden;
   transition-property: background-color color;
   transition-duration: 0.5s;
@@ -100,7 +103,7 @@ export default {
 }
 @media (min-width: 1264px) {
   .tituloAnimeCarousel {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
   .carousel {
     height: 350px !important;

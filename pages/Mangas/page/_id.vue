@@ -36,14 +36,14 @@ export default {
 
 <template lang="">
     <div>
-    <div >
-        <h1 class="content-card-title">
-            Animes
+    <div class="content-pages-manga" >
+        <h1 class="content-card-title content-card-title-manga">
+            MANGAS
         </h1>
         <v-row>
             <template v-for="(item, index) in data">
                 <v-col v-if="index < 25" class="col-card">
-                    <nuxt-link style="text-decoration: none;" :to='`/Anime/${item.mal_id}`'>
+                    <nuxt-link style="text-decoration: none;" :to='`/Manga/${item.mal_id}`'>
                         <v-card class="card">
                             <img :alt="item.title" class="card-image" :src="item.images.jpg.large_image_url" />
                             <div class="card-body">
@@ -87,4 +87,10 @@ export default {
 </template>
 
 <style>
+@media(min-width: 750px){
+  .content-pages-manga{
+    margin: 2rem;
+
+  }
+}
 </style>

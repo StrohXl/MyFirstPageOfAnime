@@ -47,7 +47,7 @@ export default {
                 {
                     icon: "mdi-star-settings-outline",
                     title: "Top Mangas",
-                    to: "/TopMangas"
+                    to: "/Mangas/TopMangas/1"
                 },
             ],
         }
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <template lang="">
-    <v-list style="position: fixed; width: 100% ; top:80px" nav >
+    <v-list style="position: fixed; width: 100% ; top:70px" nav >
       <template v-for="(item, i) in items">
         <v-tooltip right v-if="variant == true">
           <template v-slot:activator="{ on, attrs }">

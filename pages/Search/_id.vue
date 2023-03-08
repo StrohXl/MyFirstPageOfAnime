@@ -7,8 +7,8 @@ export default {
 }
 </script>
 <template >
-    <div>
-        <ListAnimeAndManga title="Resultados:" class="mt-0" :contenido="`/anime?q=${this.$route.params.id}&sfw`" 
+    <div class="content-search-list">
+        <ListAnimeAndManga title="RESULTADOS:" class="mt-0" :contenido="`/anime?q=${this.$route.params.id}&sfw`" 
             Direccion="Anime" cantidad="100" />
         <ListAnimeAndManga class="mt-0" :contenido="`/manga?q=${this.$route.params.id}&sfw`" 
             Direccion="Manga" cantidad="100" />
@@ -16,4 +16,9 @@ export default {
     </div>
 </template>
 <style >
+@media(min-width: 750px){
+    .content-search-list{
+        margin: 2rem !important;
+    }
+}
 </style>

@@ -49,12 +49,12 @@ export default {
                                     {{ item.year || '' }}
                                 </v-card-title>
                                 <v-card-title class="card-score" primary-title>
-                                  <v-icon class="mr-2 mb-1" color="orange lighten-2" >mdi-star</v-icon>  {{ item.score || '' }}
+                                  <v-icon class="mr-2 mb-1" style="color: #ffcb0f;">mdi-star</v-icon>  {{ item.score || '' }}
                                 </v-card-title>
                             </div>
                         </v-card>
                     </nuxt-link>
-                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <div v-if="item.status" style="display: flex; justify-content: space-between; margin-top: 10px;">
                         <div class="col-status">{{ item.status }}</div>
                         <div class="col-type">{{ item.type }}</div>
                     </div>
@@ -113,7 +113,7 @@ export default {
     bottom: 0;
     right: 0;
     font-size: 0.8rem;
-    color: #f1c914ef;
+    color: #ffcb0f;
 
 }
 
@@ -147,7 +147,7 @@ export default {
 }
 
 .card-image {
-    border-radius: 4px;
+    border-radius: 1rem;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -198,7 +198,7 @@ export default {
 
 @media(min-width:1264px) {
     .content-card-title {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
     .card-title{
         font-size: .9rem;

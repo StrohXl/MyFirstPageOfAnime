@@ -8,7 +8,7 @@
                 Direccion="Anime" pagina="1" cantidad="10" />
             <ListAnimeAndManga timeout='1600' verMas="/Animes/page/1" contenido="/anime" title="ANIMES" Direccion="Anime"
                 cantidad="10" />
-            <ListAnimeAndManga timeout='3000' verMas="/Mangas/page/1" contenido="/manga" title="MANGAS" Direccion="Anime"
+            <ListAnimeAndManga timeout='3000' verMas="/Mangas/page/1" contenido="/manga" title="MANGAS" Direccion="Manga"
                 cantidad="10" />
         </v-col>
 

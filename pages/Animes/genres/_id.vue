@@ -39,7 +39,7 @@ export default {
   <div>
        <div class="content-card content-card-pages">
           <h1 class="content-card-title">
-              ANIMES  s
+              ANIMES  
           </h1>
           <v-row>
               <template v-for="(item, index) in data">

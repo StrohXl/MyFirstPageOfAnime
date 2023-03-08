@@ -79,7 +79,7 @@ import Search from '../components/Search.vue';export default {
 </script>
 <template>
   <v-app>
-    <v-app-bar class="pl-5 pr-5 header" style=" z-index: 1000;" color="dark" fixed elevation="0">
+    <v-app-bar class="header" style=" z-index: 1000;" color="dark" fixed elevation="0">
       <v-btn value="recent" icon @click.stop="drawer = !drawer" class="boton">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -92,7 +92,7 @@ import Search from '../components/Search.vue';export default {
         <v-icon class="text-h5 white--text">mdi-magnify</v-icon>
       </v-btn>
       <div :class="search ? 'content-search-show' : 'content-search-hidden'">
-        <v-btn text @click.stop="search = false" color="#272727" light>
+        <v-btn style="width: 40px; font-size: .2rem; min-width: 0;" text @click.stop="search = false" color="#272727" light>
           <v-icon class="text-h5 white--text">mdi-close</v-icon>
         </v-btn>
         <Search class="module-search" />
@@ -172,6 +172,9 @@ import Search from '../components/Search.vue';export default {
 
 
 @media(min-width:750px) {
+  .header{
+    padding-left: .8rem !important;
+  }
   .botonResponsive {
     display: none;
   }
@@ -191,10 +194,6 @@ import Search from '../components/Search.vue';export default {
 }
 
 @media (min-width:250px) and (max-width:750px) {
-  .colDefaultActive {
-    margin-left: 2rem;
-  }
-
   .tituloIntersectado {
     font-size: 40px !important;
 

@@ -24,7 +24,7 @@
           class=" py-4 text-center white--text text-caption"
           cols="12"
         >
-          {{ new Date().getFullYear() }} — <strong>VueAnime</strong>
+          {{ new Date().getFullYear() }} — <strong>VueAnime Created for Xavier Mayora</strong>
         </v-col>
       </v-row>
     </v-footer>
@@ -36,8 +36,10 @@ export default {
       links: [
         { name: "Inicio", to: "/"},
         { name: "Animes", to: "/Animes"},
-        { name: "TopAnimes", to: "/TopAnimes"},
-        { name: "Emision", to: "/Emision"},
+        { name: "TopAnimes", to: "/Animes/TopAnimes/1"},
+        { name: "Emision", to: "/Animes/seasons-now/1"},
+        { name: "Mangas", to: "/Mangas"},
+        { name: "TopMangas", to: "/Mangas/TopMangas/1"},
       ],
     }),
 }
