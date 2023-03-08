@@ -134,13 +134,13 @@ export default {
 .card-title {
     overflow: hidden;
     height: 40px;
-    font-size: .6rem !important;
+    font-size: 0.6rem;
     padding-bottom: 0;
 }
 
 .card-year {
     padding-top: 0;
-    font-size: .5rem;
+    font-size: 0.5rem;
 }
 
 .card-image {
@@ -164,11 +164,11 @@ export default {
     }
 
     .card-title {
-        font-size: .8rem;
+        font-size: 0.8rem;
     }
 
     .card-year {
-        font-size: .7rem;
+        font-size: 0.7rem;
     }
 
     .card-score {
@@ -186,7 +186,7 @@ export default {
     }
 
     .col-card {
-        margin-top: .7rem;
+        margin-top: 0.7rem;
         max-width: 33% !important;
         height: 210px;
     }
@@ -218,11 +218,11 @@ export default {
     }
 
     .card-title {
-        font-size: .9rem;
+        font-size: 0.9rem;
     }
 
     .card-year {
-        font-size: .8rem;
+        font-size: 0.8rem;
     }
 
     .card-score {

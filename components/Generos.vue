@@ -9,9 +9,7 @@ export default {
     },
     props: ['genres', 'variant', 'direccion', 'time'],
     mounted() {
-        this.LoadData(
-
-        )
+        this.LoadData()
     },
 
     methods: {
